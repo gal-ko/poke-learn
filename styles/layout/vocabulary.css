@@ -1,0 +1,45 @@
+#vocabulary-game {
+  text-align: center;
+}
+
+.vocab-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .05));
+  border: 2px solid rgba(255, 255, 255, .12);
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto 20px;
+}
+
+.vocab-card .english-word {
+  font-size: 32px;
+  font-weight: var(--weight-bold);
+  color: #fff;
+  margin: 12px 0 4px;
+  direction: ltr;
+}
+
+.vocab-card .hebrew-word {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-light);
+  color: var(--accent);
+  margin: 4px 0;
+}
+
+.vocab-card .category-label {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  background: rgba(var(--accent-rgb), .15);
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+.vocab-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}

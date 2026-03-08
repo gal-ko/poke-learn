@@ -1,0 +1,22 @@
+@media (max-width: 600px) {
+  .game-grid { grid-template-columns: 1fr; }
+  .game-card { padding: 20px 16px; }
+  .menu-screen h2 { font-size: var(--text-md); }
+  .top-bar h1 { font-size: var(--text-sm); }
+  .vocab-card .english-word { font-size: var(--text-lg); }
+  .reading-text { font-size: var(--text-lg); }
+  .pokemon-sprite { width: 110px; height: 110px; }
+
+  .profile-card { padding: 28px 20px; }
+  .profile-mascot { width: 90px; height: 90px; }
+  .stats-grid { gap: 8px; }
+  .stat-card { padding: 10px 6px; }
+  .stat-value { font-size: var(--text-lg); }
+
+  .dex-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+  }
+  .dex-card img { width: 72px; height: 72px; }
+  .dex-name { font-size: var(--text-sm); }
+}

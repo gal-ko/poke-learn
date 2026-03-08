@@ -1,0 +1,230 @@
+html.layout-dark {
+  --font:         'Rubik', sans-serif;
+  --font-title:   'Orbitron', sans-serif;
+  --text-sm:      12px;
+  --text-md:      14px;
+  --text-lg:      22px;
+  --weight-light: 400;
+  --weight-medium: 500;
+  --weight-bold:  600;
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-lg:    28px;
+  --card-border:  none;
+  --card-bg:      rgba(255, 255, 255, .07);
+  --topbar-border: none;
+  --topbar-bg:    rgba(var(--bg-deep-rgb), .85);
+  --body-bg:      var(--bg-deep);
+  --card-hover-y: -4px;
+  --transition:   .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Top bar -- M3 surface with shadow */
+html.layout-dark .top-bar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+  border-bottom: none;
+}
+
+/* Screen transitions */
+.transition-slide-up {
+  animation: m3SlideUp .35s cubic-bezier(.4, 0, .2, 1) !important;
+}
+
+@keyframes m3SlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ M3 Menu ============ */
+html.layout-dark .m3-menu-header {
+  text-align: center;
+  padding: 8px 0 20px;
+}
+
+html.layout-dark .m3-menu-header h2 {
+  font-size: var(--text-lg);
+  color: var(--accent);
+  font-weight: var(--weight-bold);
+  margin-bottom: 4px;
+}
+
+html.layout-dark .m3-menu-header p {
+  color: #aaa;
+  font-size: var(--text-md);
+}
+
+/* Section labels */
+html.layout-dark .m3-section {
+  margin-bottom: 24px;
+}
+
+html.layout-dark .m3-section-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 12px;
+  padding-right: 4px;
+}
+
+/* Horizontal carousel */
+html.layout-dark .m3-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 16px;
+  scrollbar-width: none;
+  justify-content: center;
+}
+
+html.layout-dark .m3-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* M3 Cards */
+html.layout-dark .m3-card {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, .06);
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .25s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
+}
+
+html.layout-dark .m3-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .2);
+}
+
+html.layout-dark .m3-card:active {
+  transform: scale(.97);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+html.layout-dark .m3-card-media {
+  background: rgba(var(--accent-rgb), .08);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html.layout-dark .m3-card-media img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .3));
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+html.layout-dark .m3-card:hover .m3-card-media img {
+  transform: scale(1.1);
+}
+
+html.layout-dark .m3-card-body {
+  padding: 16px 20px 20px;
+}
+
+html.layout-dark .m3-card-body h3 {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+html.layout-dark .m3-card-body p {
+  font-size: var(--text-sm);
+  color: #aaa;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+/* M3 Chip */
+html.layout-dark .m3-chip {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), .1);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+/* ============ M3 Buttons ============ */
+html.layout-dark .btn {
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-radius: 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+html.layout-dark .btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+html.layout-dark .btn:active {
+  transform: scale(.97);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+html.layout-dark .btn-tertiary {
+  border-radius: 12px;
+}
+
+html.layout-dark .speak-btn {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+/* ============ M3 Game cards ============ */
+html.layout-dark .game-card {
+  border: none;
+  border-radius: 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
+}
+
+html.layout-dark .game-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+  border: none;
+}
+
+html.layout-dark .card-stars {
+  border: none;
+  border-radius: 20px;
+}
+
+/* ============ M3 Memory Game ============ */
+html.layout-dark .memory-card {
+  border-radius: 24px;
+}
+
+html.layout-dark .memory-card-front,
+html.layout-dark .memory-card-back {
+  border-radius: 24px;
+}
+
+html.layout-dark .memory-card-front {
+  background: rgba(255, 255, 255, .06);
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
+}
+
+html.layout-dark .memory-card-front::after {
+  font-size: 32px;
+  font-weight: var(--weight-medium);
+}
+
+html.layout-dark .memory-card-back {
+  background: rgba(255, 255, 255, .07);
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
+}
+
+html.layout-dark .memory-card.matched {
+  opacity: .4;
+}

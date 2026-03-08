@@ -1,0 +1,300 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mi {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+html {
+  background: var(--bg-deep);
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-md);
+  font-weight: var(--weight-light);
+  background: var(--body-bg);
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .pixel {
+  font-family: var(--font);
+  font-weight: var(--weight-bold);
+}
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 56px;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: var(--topbar-border);
+}
+
+.top-bar h1 {
+  font-family: var(--font-title);
+  font-size: var(--text-lg);
+  color: var(--accent);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  direction: ltr;
+}
+
+.topbar-username {
+  font-size: var(--text-sm);
+  color: #ccc;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stars-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--accent);
+}
+
+.stars-display .star-icon {
+  font-size: var(--text-lg);
+}
+
+.back-btn {
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--text-md);
+  font-family: var(--font);
+  font-weight: var(--weight-medium);
+  transition: var(--transition);
+  display: none;
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  color: var(--bg-deep);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 20px 40px;
+}
+
+/* Shared game screen styles */
+.game-screen {
+  display: none;
+  padding: 16px 0 24px;
+  animation: fadeIn .4s ease;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.game-header h2 {
+  font-size: var(--text-lg);
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.game-header p {
+  color: #aaa;
+  font-size: var(--text-md);
+}
+
+.game-info {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  padding: 10px 16px;
+  margin-top: 8px;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, .55);
+  text-align: start;
+  direction: rtl;
+  max-width: 400px;
+}
+
+.game-info .info-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: center;
+}
+
+.game-info kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, .7);
+  line-height: 1.4;
+}
+
+.game-info .info-motivation {
+  color: var(--accent);
+  font-weight: var(--weight-medium);
+}
+
+.pokemon-sprite {
+  width: 140px;
+  height: 140px;
+  image-rendering: var(--sprite-render);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .5));
+}
+
+.pokemon-sprite-sm {
+  width: 96px;
+  height: 96px;
+  image-rendering: var(--sprite-render);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 120px;
+  min-height: 48px;
+}
+
+.btn-primary { background: var(--accent); color: var(--bg-deep); }
+.btn-primary:hover { background: var(--accent-hover); transform: scale(1.05); }
+.btn-secondary { background: rgba(255, 255, 255, .15); color: #fff; border: 2px solid rgba(255, 255, 255, .3); }
+.btn-secondary:hover { background: rgba(255, 255, 255, .25); }
+.btn-destructive { background: none; color: #888; border: 2px solid rgba(255, 255, 255, .15); }
+.btn-destructive:hover { border-color: var(--danger); color: var(--danger); }
+.btn-sm { padding: 10px 18px; font-size: var(--text-sm); min-width: 80px; min-height: 40px; }
+
+.toggle-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.btn-tertiary {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .08);
+  color: #ccc;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: var(--text-md);
+  font-weight: var(--weight-light);
+  min-height: 48px;
+  transition: var(--transition);
+}
+
+.btn-tertiary.active {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), .15);
+  color: var(--accent);
+  font-weight: var(--weight-medium);
+}
+
+.btn-tertiary:hover {
+  border-color: var(--accent);
+}
+
+.speak-btn {
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  margin: 8px;
+}
+
+.speak-btn .mi {
+  font-size: 24px;
+}
+
+.speak-btn:hover {
+  background: var(--accent);
+  color: var(--bg-deep);
+}
+
+.profile-btn {
+  background: rgba(255, 255, 255, .06);
+  border: 2px solid rgba(255, 255, 255, .2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+  padding: 0;
+  overflow: hidden;
+}
+
+.profile-btn img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.profile-btn:hover {
+  border-color: var(--accent);
+}

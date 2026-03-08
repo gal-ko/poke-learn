@@ -1,0 +1,204 @@
+#pokedex-screen .game-header {
+  margin-bottom: 16px;
+}
+
+.dex-count {
+  text-align: center;
+  color: #666;
+  font-size: var(--text-sm);
+  margin-bottom: 16px;
+}
+
+.dex-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  direction: ltr;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+  .dex-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 460px) {
+  .dex-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.dex-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .05));
+  border: 2px solid rgba(255, 255, 255, .15);
+  border-radius: 16px;
+  padding: 16px 10px 12px;
+  text-align: center;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.dex-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), .15);
+}
+
+.dex-card img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+}
+
+.dex-id {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #aaa;
+  margin-top: 6px;
+  direction: ltr;
+}
+
+.dex-name {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  margin-top: 2px;
+  direction: ltr;
+}
+
+.dex-he {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #aaa;
+  margin-top: 1px;
+}
+
+.dex-type {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  margin-top: 6px;
+  text-transform: capitalize;
+}
+
+/* ============ Honeycomb View ============ */
+.hex-grid {
+  margin: 0 auto;
+  padding: 10px 0;
+  direction: ltr;
+  overflow: hidden;
+}
+
+.hex-row {
+  display: flex;
+  justify-content: center;
+  margin-top: -38px;
+}
+
+.hex-row:first-child {
+  margin-top: 0;
+}
+
+.hex-row-offset {
+  display: flex;
+  justify-content: center;
+  margin-top: -38px;
+  padding-left: 140px;
+}
+
+.hex-cell {
+  width: 140px;
+  height: 155px;
+  flex-shrink: 0;
+  perspective: 600px;
+}
+
+.hex-cell.hex-empty {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.hex-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+  transform-style: preserve-3d;
+}
+
+.hex-cell.flipped .hex-inner {
+  transform: rotateY(180deg);
+}
+
+.hex-front,
+.hex-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hex-front {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .04));
+  transition: .3s;
+}
+
+.hex-cell:hover .hex-front {
+  background: linear-gradient(145deg, rgba(var(--accent-rgb), .15), rgba(var(--accent-rgb), .05));
+}
+
+.hex-front img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .4));
+  transition: transform .3s;
+}
+
+.hex-back {
+  background: linear-gradient(145deg, rgba(var(--accent-rgb), .12), rgba(255, 255, 255, .06));
+  transform: rotateY(180deg);
+  gap: 2px;
+}
+
+.hex-id {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #aaa;
+  direction: ltr;
+}
+
+.hex-name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  direction: ltr;
+}
+
+.hex-he {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #ccc;
+}
+
+.hex-type {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  text-transform: capitalize;
+  margin-top: 2px;
+}

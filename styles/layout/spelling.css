@@ -1,0 +1,117 @@
+#spelling-game {
+  text-align: center;
+}
+
+.spelling-slots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  direction: ltr;
+}
+
+.spell-slot {
+  width: 44px;
+  min-width: 44px;
+  height: 52px;
+  border: 2px dashed rgba(255, 255, 255, .3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: #fff;
+  transition: .3s;
+  background: rgba(255, 255, 255, .05);
+}
+
+.spell-slot.filled {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), .12);
+}
+
+.spell-slot.correct {
+  border-color: var(--success);
+  background: rgba(76, 175, 80, .2);
+  color: var(--success);
+}
+
+.spell-slot.wrong {
+  border-color: var(--danger);
+  background: rgba(227, 53, 13, .2);
+  color: var(--danger);
+  animation: shake .4s;
+}
+
+.letter-tiles {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  direction: ltr;
+}
+
+.letter-tile {
+  width: 48px;
+  height: 52px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+}
+
+.letter-tile:hover {
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.letter-tile.used {
+  opacity: .3;
+  pointer-events: none;
+}
+
+.letter-tile[draggable="true"] {
+  cursor: grab;
+}
+
+.letter-tile.dragging {
+  opacity: .4;
+  cursor: grabbing;
+}
+
+.spell-slot.drag-over {
+  border-color: var(--accent);
+  border-style: solid;
+  background: rgba(var(--accent-rgb), .15);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .3);
+  transform: scale(1.05);
+}
+
+.spell-ghost {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(var(--accent-rgb), .25);
+  border: 2px solid var(--accent);
+  color: #fff;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .85;
+}

@@ -1,0 +1,310 @@
+#alphabet-game {
+  text-align: center;
+}
+
+.abc-letter-nav {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  direction: ltr;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.abc-letter-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  color: #888;
+  font-family: var(--font);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.abc-letter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.abc-letter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-deep);
+}
+
+.abc-letter-btn.words-only {
+  border-style: dashed;
+  font-style: italic;
+}
+
+.abc-letter-btn.words-only.active {
+  border-style: solid;
+}
+
+/* Hero card with side arrows */
+.abc-hero-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  direction: ltr;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.abc-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .15);
+  background: rgba(255, 255, 255, .06);
+  color: rgba(255, 255, 255, .7);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+  flex-shrink: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.abc-arrow:hover,
+.abc-arrow.active {
+  background: rgba(var(--accent-rgb), .15);
+  border-color: rgba(var(--accent-rgb), .4);
+  color: var(--accent);
+}
+
+.abc-hero {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .04));
+  border: 2px solid rgba(255, 255, 255, .12);
+  border-radius: 24px;
+  padding: 24px 20px 20px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  direction: ltr;
+}
+
+.abc-hero-letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.abc-hero-letters {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.abc-hero-big {
+  font-size: 90px;
+  font-weight: var(--weight-bold);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.abc-hero-small {
+  font-size: 48px;
+  font-weight: var(--weight-medium);
+  color: rgba(var(--accent-rgb), .55);
+  line-height: 1;
+}
+
+.abc-hero-bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.abc-hero-speak {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+  font-size: var(--text-lg);
+  cursor: pointer;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.abc-hero-speak:hover,
+.abc-hero-speak.active {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), .15);
+}
+
+.abc-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+}
+
+.abc-hero-sprite {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4));
+}
+
+.abc-hero-emoji {
+  font-size: 88px;
+  line-height: 128px;
+}
+
+.abc-hero-name {
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: #fff;
+}
+
+.abc-hero-name strong {
+  color: var(--accent);
+}
+
+.abc-hero-phonetic {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: rgba(255, 255, 255, .6);
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+.abc-count {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #666;
+  margin-bottom: 12px;
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+/* Pokemon / word grid */
+.abc-pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  direction: ltr;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.abc-pokemon-card {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  padding: 12px 8px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.abc-pokemon-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.abc-pokemon-card img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.abc-poke-name {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #fff;
+  margin-top: 4px;
+  direction: ltr;
+}
+
+.abc-poke-name strong {
+  color: var(--accent);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+
+.abc-poke-he {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #888;
+  margin-top: 1px;
+  direction: rtl;
+}
+
+.abc-word-card {
+  background: linear-gradient(145deg, rgba(var(--accent-rgb), .08), rgba(var(--accent-rgb), .03));
+  border: 1px solid rgba(var(--accent-rgb), .18);
+  border-radius: 14px;
+  padding: 14px 10px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.abc-word-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.abc-word-card img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  opacity: .7;
+}
+
+.abc-word-context {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: #777;
+  margin-top: 4px;
+  line-height: 1.3;
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+
+@media (max-width: 600px) {
+  .abc-hero { padding: 18px 14px 16px; gap: 14px; }
+  .abc-hero-big { font-size: 64px; }
+  .abc-hero-small { font-size: 34px; }
+  .abc-hero-sprite { width: 100px; height: 100px; }
+  .abc-hero-emoji { font-size: 68px; line-height: 100px; }
+  .abc-pokemon-grid { grid-template-columns: repeat(3, 1fr); }
+  .abc-pokemon-card img { width: 52px; height: 52px; }
+  .abc-letter-btn { width: 30px; height: 30px; font-size: var(--text-sm); }
+  .abc-arrow { width: 36px; height: 36px; font-size: 18px; }
+}

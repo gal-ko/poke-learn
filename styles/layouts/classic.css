@@ -1,0 +1,7 @@
+html.layout-classic {
+  --weight-bold: 500;
+}
+
+.transition-fade {
+  animation: fadeIn .4s ease;
+}
