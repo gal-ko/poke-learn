@@ -10,6 +10,27 @@
 
   <!-- Styles: core -->
   <link rel="stylesheet" href="styles/core/variables.css">
+  <script src="scripts/manifests/themes.js"></script>
+  <script>
+    // Apply saved theme before first paint to avoid a color flash.
+    (function() {
+      var id = localStorage.getItem('pokemon-theme');
+      if (!id || !THEMES[id]) {
+        var av = parseInt(localStorage.getItem('pokemon-avatar') || '0');
+        if (av) id = Object.keys(THEMES).find(function(k) { return THEMES[k].pokemonId === av; });
+        if (!id) id = Object.keys(THEMES)[0];
+      }
+      var t = THEMES[id], s = document.documentElement.style;
+      function rgb(h) { var n = parseInt(h.slice(1),16); return (n>>16&255)+', '+(n>>8&255)+', '+(n&255); }
+      s.setProperty('--bg-deep',     t.bgDeep);
+      s.setProperty('--bg-mid',      t.bgMid);
+      s.setProperty('--bg-surface',  t.bgSurface);
+      s.setProperty('--bg-deep-rgb', rgb(t.bgDeep));
+      s.setProperty('--accent',      t.accent);
+      s.setProperty('--accent-hover',t.accentHover);
+      s.setProperty('--accent-rgb',  rgb(t.accent));
+    })();
+  </script>
   <link rel="stylesheet" href="styles/core/base.css">
 
   <!-- Styles: layout -->
@@ -221,7 +242,7 @@
   </div>
 
   <!-- Scripts: manifests (pure data, load first) -->
-  <script src="scripts/manifests/themes.js"></script>
+  <!-- themes.js is loaded in <head> for early theme application -->
   <script src="scripts/manifests/layouts.js"></script>
   <script src="scripts/manifests/screens.js"></script>
   <script src="scripts/manifests/cards.js"></script>

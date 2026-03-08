@@ -1,12 +1,12 @@
 :root {
-  --bg-deep:      #1A1A2E;
-  --bg-mid:       #16213E;
-  --bg-surface:   #0F3460;
-  --bg-deep-rgb:  26, 26, 46;
+  --bg-deep:      #162428;
+  --bg-mid:       #1E3438;
+  --bg-surface:   #28484E;
+  --bg-deep-rgb:  22, 36, 40;
 
-  --accent:       #FFCB05;
-  --accent-hover: #FFE066;
-  --accent-rgb:   255, 203, 5;
+  --accent:       #50C0A8;
+  --accent-hover: #70E0C8;
+  --accent-rgb:   80, 192, 168;
 
   --success:      #4CAF50;
   --danger:       #E3350D;
