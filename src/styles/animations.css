@@ -1,5 +1,5 @@
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(var(--fade-slide, 20px)); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -91,8 +91,9 @@
   font-size: var(--text-lg);
   z-index: 1000;
   pointer-events: none;
-  transition: left .6s cubic-bezier(.2,.8,.3,1), top .6s cubic-bezier(.2,.8,.3,1), transform .6s ease, opacity .6s ease;
+  transition: transform .6s cubic-bezier(.2,.8,.3,1), opacity .6s ease;
   filter: drop-shadow(0 0 6px rgba(var(--accent-rgb),.8));
+  will-change: transform, opacity;
 }
 
 @keyframes starBump {
@@ -146,15 +147,6 @@
   justify-content: center;
 }
 
-.evo-text {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-  color: var(--accent);
-  margin-bottom: 32px;
-  animation: evoSlideUp .8s ease;
-  text-shadow: 0 0 20px rgba(var(--accent-rgb),.6);
-}
-
 .evo-sprites {
   position: relative;
   width: 200px;
@@ -199,10 +191,6 @@
   filter: brightness(3) drop-shadow(0 0 40px rgba(255,255,255,.8));
 }
 
-.evo-overlay.evo-phase2 .evo-text {
-  animation: evoPulse .6s ease infinite;
-}
-
 .evo-overlay.evo-phase3 .evo-flash {
   animation: evoGlow .8s ease forwards;
 }
@@ -219,8 +207,3 @@
   filter: drop-shadow(0 0 30px rgba(var(--accent-rgb),.6));
 }
 
-.evo-overlay.evo-phase3 .evo-text {
-  animation: none;
-  color: #fff;
-  text-shadow: 0 0 30px rgba(var(--accent-rgb),.8);
-}

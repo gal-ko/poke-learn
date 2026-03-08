@@ -14,7 +14,7 @@ container.innerHTML =
 on('stars:changed', function() {
   var timer = getEvoTimer();
   if (timer) clearTimeout(timer);
-  setEvoTimer(setTimeout(checkStarEvolution, 3500));
+  setEvoTimer(setTimeout(checkStarEvolution, 3500)); // allow overlay to finish before evo check
 });
 
 on('evolution:complete', function() { updateTopbar(); });

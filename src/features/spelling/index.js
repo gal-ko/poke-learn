@@ -1,3 +1,6 @@
+var SPELL_NEXT_ROUND_DELAY = 2800;
+var SPELL_WRONG_LOCK_DELAY = 1200;
+
 var spellDiff = 'easy';
 var spellWord = '';
 var spellPokemon = null;
@@ -37,12 +40,7 @@ function setSpellDiff(d) {
 }
 
 function buildSpellQueue() {
-  let pool;
-  if (spellDiff === 'easy') pool = POKEMON.filter(p => p.name.length <= 5);
-  else if (spellDiff === 'medium') pool = POKEMON.filter(p => p.name.length >= 5 && p.name.length <= 7);
-  else pool = POKEMON.filter(p => p.name.length >= 7);
-  if (!pool.length) pool = POKEMON;
-  spellQueue = shuffle([...pool]);
+  spellQueue = shuffle([...filterByDifficulty(spellDiff, POKEMON)]);
   spellQueueDiff = spellDiff;
 }
 
@@ -63,6 +61,7 @@ function initSpelling() {
   setSprite(document.getElementById('spellSprite'), spellPokemon.id);
   renderSpellSlots();
   renderLetterTiles();
+  spellBindDrag();
 }
 
 function renderSpellSlots() {
@@ -152,7 +151,7 @@ function spellCheck() {
     addStar(1);
     AppState.incrementGamesCompleted();
     showCaught(spellPokemon.id, STRINGS.starReward(1), 1);
-    setTimeout(() => initSpelling(), 2800);
+    _spellTimeout(() => initSpelling(), SPELL_NEXT_ROUND_DELAY);
   } else {
     slotEls.forEach((s, i) => {
       if (spellSlots[i].letter === spellWord[i]) {
@@ -161,7 +160,7 @@ function spellCheck() {
         s.classList.add('wrong');
       }
     });
-    setTimeout(() => {
+    _spellTimeout(() => {
       for (let i = 0; i < spellSlots.length; i++) {
         if (spellSlots[i] === null) continue;
         if (spellSlots[i].letter === spellWord[i]) {
@@ -173,14 +172,32 @@ function spellCheck() {
       }
       renderSpellSlots();
       renderLetterTiles();
-    }, 1200);
+    }, SPELL_WRONG_LOCK_DELAY);
   }
 }
 
 var _spellDragIdx = null;
 var _spellGhost = null;
+var _spellDragBound = false;
+var _spellTimers = [];
+
+function _spellTimeout(fn, ms) {
+  var id = setTimeout(function() {
+    _spellTimers = _spellTimers.filter(function(t) { return t !== id; });
+    fn();
+  }, ms);
+  _spellTimers.push(id);
+  return id;
+}
+
+function cleanupSpelling() {
+  _spellTimers.forEach(function(id) { clearTimeout(id); });
+  _spellTimers = [];
+}
 
 function spellBindDrag() {
+  if (_spellDragBound) return;
+  _spellDragBound = true;
   const game = document.getElementById('spelling-game');
 
   game.addEventListener('dragstart', function(e) {
@@ -275,6 +292,4 @@ function spellBindDrag() {
   });
 }
 
-spellBindDrag();
-
-registerScreen('spelling', { init: initSpelling });
+registerScreen('spelling', { init: initSpelling, cleanup: cleanupSpelling });

@@ -163,18 +163,6 @@ h1, h2, h3, .pixel {
   align-items: center;
 }
 
-.game-info kbd {
-  display: inline-block;
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .15);
-  border-radius: 5px;
-  padding: 1px 6px;
-  font-family: inherit;
-  font-size: var(--text-sm);
-  color: rgba(255, 255, 255, .7);
-  line-height: 1.4;
-}
-
 .game-info .info-motivation {
   color: var(--accent);
   font-weight: var(--weight-medium);
@@ -215,8 +203,6 @@ h1, h2, h3, .pixel {
 .btn-secondary:hover { background: rgba(255, 255, 255, .25); }
 .btn-destructive { background: none; color: #888; border: 2px solid rgba(255, 255, 255, .15); }
 .btn-destructive:hover { border-color: var(--danger); color: var(--danger); }
-.btn-sm { padding: 10px 18px; font-size: var(--text-sm); min-width: 80px; min-height: 40px; }
-
 .toggle-bar {
   display: flex;
   gap: 10px;

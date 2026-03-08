@@ -1,3 +1,8 @@
+var MEM_REWARD_DELAY = 550;
+var MEM_NEXT_ROUND_DELAY = 3000;
+var MEM_WRONG_FLASH_DELAY = 600;
+var MEM_PAIRS_PER_ROUND = 4;
+
 var memDiff = 'easy';
 var memPool = [];
 var memSelected = { name: null, img: null };
@@ -6,12 +11,6 @@ var memTotal = 0;
 var memLocked = false;
 var memFocusCol = 'name';
 var memFocusIdx = 0;
-
-var POKEMON_COLOR_HEX = {
-  red: '#FF6B6B', blue: '#6BC5FF', green: '#6BFF8E', yellow: '#FFD93D',
-  purple: '#B47AFF', pink: '#FF8EC4', brown: '#D4A574', white: '#E8E8F0',
-  gray: '#A8B4C0', black: '#8890A0'
-};
 
 function drawMatchLine(pid, fromType) {
   const svg = document.getElementById('matchLines');
@@ -89,12 +88,8 @@ function initMemory() {
   memFocusCol = 'name';
   memFocusIdx = 0;
 
-  const count = 4;
-  let filtered;
-  if (memDiff === 'easy') filtered = POKEMON.filter(p => p.name.length <= 5);
-  else if (memDiff === 'medium') filtered = POKEMON.filter(p => p.name.length >= 5 && p.name.length <= 7);
-  else filtered = POKEMON.filter(p => p.name.length >= 7);
-  if (!filtered.length) filtered = POKEMON;
+  const count = MEM_PAIRS_PER_ROUND;
+  const filtered = filterByDifficulty(memDiff, POKEMON);
 
   memTotal = count;
   memPool = shuffle([...filtered]).slice(0, count);
@@ -162,23 +157,23 @@ function pickMatch(type, pid) {
       memLocked = false;
 
       if (memMatched === memTotal) {
-        setTimeout(() => {
+        _memTimeout(() => {
           addStar(2);
           AppState.incrementGamesCompleted();
           const winPid = memPool[0].id;
           showCaught(winPid, STRINGS.starReward(2), 2);
-          setTimeout(() => initMemory(), 3000);
-        }, 550);
+          _memTimeout(() => initMemory(), MEM_NEXT_ROUND_DELAY);
+        }, MEM_REWARD_DELAY);
       }
     } else {
       nameEl.classList.add('wrong');
       imgEl.classList.add('wrong');
-      setTimeout(() => {
+      _memTimeout(() => {
         nameEl.classList.remove('selected', 'wrong');
         imgEl.classList.remove('selected', 'wrong');
         memSelected = { name: null, img: null };
         memLocked = false;
-      }, 600);
+      }, MEM_WRONG_FLASH_DELAY);
     }
   }
 }
@@ -186,8 +181,28 @@ function pickMatch(type, pid) {
 var _memDragPid = null;
 var _memDragType = null;
 var _memGhost = null;
+var _memDragBound = false;
+var _memTimers = [];
+
+function _memTimeout(fn, ms) {
+  var id = setTimeout(function() {
+    _memTimers = _memTimers.filter(function(t) { return t !== id; });
+    fn();
+  }, ms);
+  _memTimers.push(id);
+  return id;
+}
+
+function cleanupMemory() {
+  _memTimers.forEach(function(id) { clearTimeout(id); });
+  _memTimers = [];
+  memLocked = false;
+  memSelected = { name: null, img: null };
+}
 
 function memBindDrag() {
+  if (_memDragBound) return;
+  _memDragBound = true;
   const board = document.getElementById('memoryGrid');
 
   board.addEventListener('dragstart', function(e) {
@@ -306,21 +321,21 @@ function memDirectMatch(namePid, imgPid, fromType) {
     document.getElementById('memScore').textContent = memMatched;
     memLocked = false;
     if (memMatched === memTotal) {
-      setTimeout(() => {
+      _memTimeout(() => {
         addStar(2);
         AppState.incrementGamesCompleted();
         showCaught(memPool[0].id, STRINGS.starReward(2), 2);
-        setTimeout(() => initMemory(), 3000);
-      }, 550);
+        _memTimeout(() => initMemory(), MEM_NEXT_ROUND_DELAY);
+      }, MEM_REWARD_DELAY);
     }
   } else {
     nameEl.classList.add('wrong');
     imgEl.classList.add('wrong');
-    setTimeout(() => {
+    _memTimeout(() => {
       nameEl.classList.remove('selected', 'wrong');
       imgEl.classList.remove('selected', 'wrong');
       memLocked = false;
-    }, 600);
+    }, MEM_WRONG_FLASH_DELAY);
   }
 }
 
@@ -380,4 +395,4 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-registerScreen('match', { init: initMemory, cleanup() {} });
+registerScreen('match', { init: initMemory, cleanup: cleanupMemory });

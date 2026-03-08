@@ -17,6 +17,9 @@ function hideAllScreens() {
   });
   runCleanups();
 
+  document.querySelectorAll('.caught-overlay, .evo-overlay, .confetti-container, .flying-star').forEach(el => el.remove());
+  if (typeof cancelEvolution === 'function') cancelEvolution();
+
   const layout = getActiveLayout();
   if (layout.cleanupMenu) layout.cleanupMenu();
 
@@ -59,18 +62,10 @@ function showScreen(name, pushState) {
   }
 }
 
-function showMenu() {
-  showScreen('menu');
-}
-
 function goHome() {
   if (currentScreen !== 'menu') {
     showScreen('menu');
   }
-}
-
-function startGame(mode, pushState) {
-  showScreen(mode, pushState);
 }
 
 function navigateToHash(hash) {

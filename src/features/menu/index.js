@@ -3,26 +3,10 @@ var menuFocusIdx = -1;
 function buildMenu() {
   const menuEl = document.getElementById('menuScreen');
   if (!menuEl) return;
+  menuFocusIdx = -1;
 
   const layout = getActiveLayout();
-  if (layout.renderMenu) {
-    layout.renderMenu(menuEl);
-  } else {
-    const renderCard = c => `
-      <div class="game-card" onclick="startGame('${c.screen}')">
-        ${sprite(c.spriteId)}
-        <h3 class="pixel">${c.title}</h3>
-        <p>${c.description}</p>
-        <span class="card-stars">${c.stars}</span>
-      </div>`;
-
-    menuEl.innerHTML = `
-      <h2 class="pixel">למד אנגלית עם פוקימון</h2>
-      <p>בחר משחק כדי להתחיל ללמוד</p>
-      <div class="game-grid">${MENU_CARDS.filter(c => c.group === 'scored').map(renderCard).join('')}</div>
-      <div class="game-grid game-grid-free">${MENU_CARDS.filter(c => c.group === 'free').map(renderCard).join('')}</div>
-    `;
-  }
+  layout.renderMenu(menuEl);
 }
 
 function getMenuCards() {

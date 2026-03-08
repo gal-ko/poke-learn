@@ -9,3 +9,11 @@ function shuffle(a) {
 function pick(a) {
   return a[Math.floor(Math.random() * a.length)];
 }
+
+function debounce(fn, ms) {
+  var timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(fn, ms);
+  };
+}

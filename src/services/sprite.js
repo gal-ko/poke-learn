@@ -1,25 +1,23 @@
-function spriteUrl(id) {
-  return 'sprites/' + id + '.png';
+function spriteBgPos(id) {
+  var pos = getSpritePos(id);
+  var xPct = SPRITE_SHEET_COLS <= 1 ? '0' : (pos[0] / (SPRITE_SHEET_COLS - 1) * 100) + '%';
+  var yPct = SPRITE_SHEET_ROWS <= 1 ? '0' : (pos[1] / (SPRITE_SHEET_ROWS - 1) * 100) + '%';
+  return xPct + ' ' + yPct;
 }
 
 function sprite(id, extraClass, extraStyle) {
-  var pos = SPRITE_POS[id];
-  if (!pos) return '';
-  var xPct = SPRITE_SHEET_COLS <= 1 ? '0' : (pos[0] / (SPRITE_SHEET_COLS - 1) * 100) + '%';
-  var yPct = SPRITE_SHEET_ROWS <= 1 ? '0' : (pos[1] / (SPRITE_SHEET_ROWS - 1) * 100) + '%';
+  var bgPos = spriteBgPos(id);
+  if (!bgPos) return '';
   var cls = 'poke-sprite' + (extraClass ? ' ' + extraClass : '');
-  var style = 'background-position:' + xPct + ' ' + yPct;
+  var style = 'background-position:' + bgPos;
   if (extraStyle) style += ';' + extraStyle;
   return '<span class="' + cls + '" style="' + style + '"></span>';
 }
 
 function setSprite(el, id) {
-  var pos = SPRITE_POS[id];
-  if (!pos || !el) return;
+  if (!el) return;
   if (!el.classList.contains('poke-sprite')) el.classList.add('poke-sprite');
-  var xPct = SPRITE_SHEET_COLS <= 1 ? '0' : (pos[0] / (SPRITE_SHEET_COLS - 1) * 100) + '%';
-  var yPct = SPRITE_SHEET_ROWS <= 1 ? '0' : (pos[1] / (SPRITE_SHEET_ROWS - 1) * 100) + '%';
-  el.style.backgroundPosition = xPct + ' ' + yPct;
+  el.style.backgroundPosition = spriteBgPos(id);
 }
 
 var MAX_SPRITE_SCALE = 1;

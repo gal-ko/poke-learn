@@ -1,3 +1,9 @@
+var POKEMON_COLOR_HEX = {
+  red: '#FF6B6B', blue: '#6BC5FF', green: '#6BFF8E', yellow: '#FFD93D',
+  purple: '#B47AFF', pink: '#FF8EC4', brown: '#D4A574', white: '#E8E8F0',
+  gray: '#A8B4C0', black: '#8890A0'
+};
+
 var POKEMON_TYPES = {
   fire:     { color: '#C25D15', he: 'אש' },
   water:    { color: '#4A6FC4', he: 'מים' },

@@ -1,11 +1,4 @@
-var CONFETTI_COLORS = {
-  pokeball:  '#E3350D',
-  blue:      '#3B4CCA',
-  pikachu:   '#FFCB05',
-  grass:     '#4CAF50',
-  psychic:   '#F85888',
-  water:     '#6890F0'
-};
+var CONFETTI_COLORS = ['#E3350D', '#3B4CCA', '#FFCB05', '#4CAF50', '#F85888', '#6890F0'];
 
 var stars = AppState.getStars();
 var prevStars = stars;
@@ -27,24 +20,27 @@ function setStars(count) {
 }
 
 function updateStarDisplay() {
+  var stored = AppState.getStars();
+  if (stored !== stars) stars = stored;
   document.getElementById('starCount').textContent = stars;
 }
 
 function showConfetti() {
   const c = document.createElement('div');
   c.className = 'confetti-container';
+  const frag = document.createDocumentFragment();
   for (let i = 0; i < 50; i++) {
     const p = document.createElement('div');
     p.className = 'confetti-piece';
     p.style.left = Math.random() * 100 + '%';
-    const colors = Object.values(CONFETTI_COLORS);
-    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
     p.style.animationDelay = Math.random() * 1 + 's';
     p.style.width = (6 + Math.random() * 8) + 'px';
     p.style.height = (6 + Math.random() * 8) + 'px';
     p.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
-    c.appendChild(p);
+    frag.appendChild(p);
   }
+  c.appendChild(frag);
   document.body.appendChild(c);
   setTimeout(() => c.remove(), 3000);
 }
@@ -75,8 +71,8 @@ function flyStarsToCounter(count, callback) {
 
   const startX = sourceRect.left + sourceRect.width / 2;
   const startY = sourceRect.top + sourceRect.height / 2;
-  const endX = targetRect.left + targetRect.width / 2;
-  const endY = targetRect.top + targetRect.height / 2;
+  const dx = targetRect.left + targetRect.width / 2 - startX;
+  const dy = targetRect.top + targetRect.height / 2 - startY;
 
   let done = 0;
   for (let i = 0; i < count; i++) {
@@ -90,15 +86,13 @@ function flyStarsToCounter(count, callback) {
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        star.style.left = endX + 'px';
-        star.style.top = endY + 'px';
-        star.style.transform = 'scale(0.4)';
+        star.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(0.4)';
         star.style.opacity = '0.6';
       });
     });
 
     star.addEventListener('transitionend', function handler(e) {
-      if (e.propertyName !== 'left') return;
+      if (e.propertyName !== 'transform') return;
       star.removeEventListener('transitionend', handler);
       star.remove();
       done++;

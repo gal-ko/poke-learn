@@ -27,12 +27,8 @@ html.layout-dark .top-bar {
 
 /* Screen transitions */
 .transition-slide-up {
-  animation: m3SlideUp .35s cubic-bezier(.4, 0, .2, 1) !important;
-}
-
-@keyframes m3SlideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
+  --fade-slide: 40px;
+  animation: fadeIn .35s cubic-bezier(.4, 0, .2, 1) !important;
 }
 
 /* ============ M3 Menu ============ */
@@ -198,33 +194,3 @@ html.layout-dark .card-stars {
   border-radius: 20px;
 }
 
-/* ============ M3 Memory Game ============ */
-html.layout-dark .memory-card {
-  border-radius: 24px;
-}
-
-html.layout-dark .memory-card-front,
-html.layout-dark .memory-card-back {
-  border-radius: 24px;
-}
-
-html.layout-dark .memory-card-front {
-  background: rgba(255, 255, 255, .06);
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
-}
-
-html.layout-dark .memory-card-front::after {
-  font-size: 32px;
-  font-weight: var(--weight-medium);
-}
-
-html.layout-dark .memory-card-back {
-  background: rgba(255, 255, 255, .07);
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 8px rgba(0, 0, 0, .15);
-}
-
-html.layout-dark .memory-card.matched {
-  opacity: .4;
-}

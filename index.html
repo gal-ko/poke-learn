@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poke-Learn</title>
   <link rel="icon" type="image/png" href="sprites/25.png">
+  <link rel="preload" as="image" href="sprites/sheet.png">
   <link rel="stylesheet" href="src/styles/fonts.css">
   <link rel="stylesheet" href="src/styles/variables.css">
   <link rel="stylesheet" href="src/styles/base.css">
@@ -21,21 +22,16 @@
   <link rel="stylesheet" href="src/features/alphabet/alphabet.css">
   <link rel="stylesheet" href="src/features/pokedex/pokedex.css">
 
+  <script src="src/config/themes.js"></script>
   <script>
     (function() {
-      var themes = {
-        bulbasaur:  { bg:'#162428', mid:'#1E3438', srf:'#28484E', acc:'#50C0A8', hov:'#70E0C8', pid:1  },
-        charmander: { bg:'#1E2838', mid:'#28394D', srf:'#325065', acc:'#F09858', hov:'#FFB478', pid:4  },
-        squirtle:   { bg:'#141E30', mid:'#1A2C48', srf:'#243B5C', acc:'#58A8F0', hov:'#80C4FF', pid:7  },
-        pikachu:    { bg:'#1A1A2E', mid:'#16213E', srf:'#0F3460', acc:'#FFCB05', hov:'#FFE066', pid:25 }
-      };
       var id = localStorage.getItem('pokemon-theme');
-      if (!id || !themes[id]) {
+      if (!id || !THEME_COMPACT[id]) {
         var av = parseInt(localStorage.getItem('pokemon-avatar') || '0');
-        id = av ? Object.keys(themes).find(function(k) { return themes[k].pid === av; }) : null;
-        if (!id) id = 'bulbasaur';
+        id = av ? Object.keys(THEME_COMPACT).find(function(k) { return THEME_COMPACT[k].pid === av; }) : null;
+        if (!id) id = 'pikachu';
       }
-      var t = themes[id], s = document.documentElement.style;
+      var t = THEME_COMPACT[id], s = document.documentElement.style;
       function rgb(h) { var n = parseInt(h.slice(1),16); return (n>>16&255)+', '+(n>>8&255)+', '+(n&255); }
       s.setProperty('--bg-deep',     t.bg);
       s.setProperty('--bg-mid',      t.mid);
@@ -78,10 +74,10 @@
   <div class="container"></div>
 
   <!-- Config & Data -->
-  <script src="src/config/themes.js"></script>
   <script src="src/config/layouts.js"></script>
   <script src="src/config/screens.js"></script>
   <script src="src/config/cards.js"></script>
+  <script src="src/config/difficulty.js"></script>
   <script src="src/data/pokemon.js"></script>
   <script src="src/data/types.js"></script>
   <script src="src/data/sprite-meta.js"></script>

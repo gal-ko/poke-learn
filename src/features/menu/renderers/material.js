@@ -6,7 +6,7 @@ LAYOUT_RENDERERS.dark = {
     const free = MENU_CARDS.filter(c => c.group === 'free');
 
     const renderCard = c => `
-      <div class="m3-card" onclick="startGame('${c.screen}')">
+      <div class="m3-card" onclick="showScreen('${c.screen}')">
         <div class="m3-card-media">
           ${sprite(c.spriteId)}
         </div>
@@ -31,7 +31,5 @@ LAYOUT_RENDERERS.dark = {
         <div class="m3-carousel">${free.map(renderCard).join('')}</div>
       </div>
     `;
-  },
-
-  cleanupMenu() {}
+  }
 };

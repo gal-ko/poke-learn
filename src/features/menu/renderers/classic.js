@@ -6,7 +6,7 @@ LAYOUT_RENDERERS.classic = {
     const free = MENU_CARDS.filter(c => c.group === 'free');
 
     const renderCard = c => `
-      <div class="game-card" onclick="startGame('${c.screen}')">
+      <div class="game-card" onclick="showScreen('${c.screen}')">
         ${sprite(c.spriteId)}
         <h3 class="pixel">${c.title}</h3>
         <p>${c.description}</p>
@@ -19,7 +19,5 @@ LAYOUT_RENDERERS.classic = {
       <div class="game-grid">${scored.map(renderCard).join('')}</div>
       <div class="game-grid game-grid-free">${free.map(renderCard).join('')}</div>
     `;
-  },
-
-  cleanupMenu() {}
+  }
 };

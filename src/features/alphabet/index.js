@@ -2,14 +2,16 @@ var abcCurrentIdx = 0;
 var abcLetters = [];
 
 function initAlphabet() {
+  var byLetter = {};
+  for (var i = 0; i < POKEMON.length; i++) {
+    var ch = POKEMON[i].name.charAt(0).toUpperCase();
+    if (!byLetter[ch]) byLetter[ch] = [];
+    byLetter[ch].push(POKEMON[i]);
+  }
   abcLetters = [];
-  for (let code = 65; code <= 90; code++) {
-    const letter = String.fromCharCode(code);
-    const pokemon = POKEMON.filter(p =>
-      p.name.charAt(0).toUpperCase() === letter
-    );
-    const words = LETTER_WORDS[letter] || null;
-    abcLetters.push({ letter, pokemon, words });
+  for (var code = 65; code <= 90; code++) {
+    var letter = String.fromCharCode(code);
+    abcLetters.push({ letter: letter, pokemon: byLetter[letter] || [], words: LETTER_WORDS[letter] || null });
   }
   abcCurrentIdx = 0;
   renderAlphabet();
@@ -124,17 +126,21 @@ function speakLetter() {
     ? item.pokemon[0].name
     : (hero ? hero.word : null);
   if (!target) { speak(letter); return; }
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const pronTarget = POKEMON_PRONUNCIATION[target] || target;
-  const u1 = new SpeechSynthesisUtterance(letter);
-  u1.lang = 'en-US';
-  u1.rate = 0.7;
-  const u2 = new SpeechSynthesisUtterance(`is for ${pronTarget}`);
-  u2.lang = 'en-US';
-  u2.rate = 0.8;
-  window.speechSynthesis.speak(u1);
-  window.speechSynthesis.speak(u2);
+  try {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const pronTarget = POKEMON_PRONUNCIATION[target] || target;
+    const u1 = new SpeechSynthesisUtterance(letter);
+    u1.lang = 'en-US';
+    u1.rate = 0.7;
+    u1.onerror = function() {};
+    const u2 = new SpeechSynthesisUtterance('is for ' + pronTarget);
+    u2.lang = 'en-US';
+    u2.rate = 0.8;
+    u2.onerror = function() {};
+    window.speechSynthesis.speak(u1);
+    window.speechSynthesis.speak(u2);
+  } catch (e) {}
 }
 
 function flashArrow(selector) {

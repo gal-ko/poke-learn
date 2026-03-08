@@ -40,7 +40,8 @@ function initProfile() {
     document.querySelector('.profile-card').classList.remove('setup-mode');
     input.value = username;
     input.disabled = true;
-    greeting.innerHTML = `<span class="pixel">${STRINGS.returnGreeting(username)}</span>`;
+    greeting.innerHTML = '<span class="pixel"></span>';
+    greeting.querySelector('.pixel').textContent = STRINGS.returnGreeting(username);
     subtitle.textContent = STRINGS.returnSubtitle;
     playBtn.innerHTML = STRINGS.returnPlayBtn;
     playBtn.disabled = false;
@@ -83,7 +84,8 @@ function showSetupStage(stage) {
   } else {
     renderAvatarPicker(false);
     const name = input.value.replace(/[^\u0590-\u05FFa-zA-Z0-9 ]/g, '').trim();
-    greeting.innerHTML = `<span class="pixel">היי ${name}!</span>`;
+    greeting.innerHTML = '<span class="pixel"></span>';
+    greeting.querySelector('.pixel').textContent = 'היי ' + name + '!';
     subtitle.textContent = 'בחר פוקימון שילווה אותך';
     playBtn.innerHTML = STRINGS.welcomePlayBtn;
     playBtn.disabled = false;
@@ -221,10 +223,11 @@ function profilePlay() {
   const input = document.getElementById('profileNameInput');
   const name = input.value.replace(/[^\u0590-\u05FFa-zA-Z0-9 ]/g, '').trim();
   if (!name) return;
+  const isNewUser = !AppState.getUsername();
   AppState.setUsername(name);
   AppState.setAvatar(selectedAvatar);
-  AppState.setLastEvoLevel(0);
-  showMenu();
+  if (isNewUser) AppState.setLastEvoLevel(0);
+  showScreen('menu');
 }
 
 function resetProgress() {
@@ -234,7 +237,7 @@ function resetProgress() {
   selectedAvatar = STARTER_POKEMON_IDS[0];
   setupStage = 0;
   applyThemeForPokemon(selectedAvatar);
-  applyLayout(AppState.getLayout());
+  applyLayout(resolveLayout());
   syncEvoLevel();
   initProfile();
   showScreen('profile');

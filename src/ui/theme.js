@@ -6,7 +6,7 @@ function resolveTheme() {
     const match = getThemeForPokemon(avatarId);
     if (match) return match;
   }
-  return Object.keys(THEMES)[0];
+  return getThemeForPokemon(STARTER_POKEMON_IDS[0]) || Object.keys(THEMES)[0];
 }
 
 function applyTheme(id) {

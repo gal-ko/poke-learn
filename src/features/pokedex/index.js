@@ -4,7 +4,7 @@ var _dexResizeHandler = null;
 function initPokedex() {
   renderPokedex();
   if (_dexResizeHandler) window.removeEventListener('resize', _dexResizeHandler);
-  _dexResizeHandler = () => { if (dexView === 'honeycomb') renderPokedex(); };
+  _dexResizeHandler = debounce(function() { if (dexView === 'honeycomb') renderPokedex(); }, 200);
   window.addEventListener('resize', _dexResizeHandler);
 }
 
@@ -13,6 +13,7 @@ function cleanupPokedex() {
     window.removeEventListener('resize', _dexResizeHandler);
     _dexResizeHandler = null;
   }
+  _flippedHex = null;
 }
 
 function setDexView(view) {
@@ -81,13 +82,27 @@ function renderPokedex() {
   }
 }
 
+var _flippedHex = null;
+
 function toggleHex(el, name) {
-  const wasFlipped = el.classList.contains('flipped');
-  document.querySelectorAll('.hex-cell.flipped').forEach(c => c.classList.remove('flipped'));
-  if (!wasFlipped) {
-    el.classList.add('flipped');
-    speak(name);
+  if (_flippedHex === el) {
+    el.classList.remove('flipped');
+    var prev = el;
+    setTimeout(function() { prev.classList.remove('hex-3d'); }, 600);
+    _flippedHex = null;
+    return;
   }
+  if (_flippedHex) {
+    _flippedHex.classList.remove('flipped');
+    var old = _flippedHex;
+    setTimeout(function() { old.classList.remove('hex-3d'); }, 600);
+  }
+  el.classList.add('hex-3d');
+  requestAnimationFrame(function() {
+    el.classList.add('flipped');
+  });
+  _flippedHex = el;
+  setTimeout(function() { speak(name); }, 50);
 }
 
 function getTypeColor(type) {

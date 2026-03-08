@@ -303,23 +303,6 @@
   100% { transform: translateX(100%); }
 }
 
-.evo-bar-label {
-  text-align: center;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-light);
-  color: #bbb;
-  margin-top: 6px;
-  direction: ltr;
-  opacity: 0;
-  animation: fadeInUp .4s ease forwards;
-  animation-delay: 1s;
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .stats-grid {
   display: flex;
   gap: 12px;

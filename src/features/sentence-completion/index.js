@@ -1,7 +1,10 @@
+var READ_NEXT_DELAY = 2500;
+
 var readAnswered = false;
 var readCategory = 'colors';
 var readCurrent = null;
 var readQueue = [];
+var _readTimer = null;
 
 function setReadCategory(cat) {
   readCategory = cat;
@@ -72,9 +75,14 @@ function initReading() {
 }
 
 function nextReading() {
+  if (_readTimer) { clearTimeout(_readTimer); _readTimer = null; }
   readAnswered = false;
   readCurrent = makeQuestion(nextFromQueue());
   renderReading();
+}
+
+function cleanupReading() {
+  if (_readTimer) { clearTimeout(_readTimer); _readTimer = null; }
 }
 
 function renderReading() {
@@ -121,7 +129,7 @@ function answerQuiz(i) {
   } else {
     wraps[i].classList.add('wrong-answer');
   }
-  setTimeout(() => nextReading(), 2500);
+  _readTimer = setTimeout(() => nextReading(), READ_NEXT_DELAY);
 }
 
 function speakReading() {
@@ -129,4 +137,4 @@ function speakReading() {
   speak(r.sentence.replace('____.', '').replace('____', '').trim());
 }
 
-registerScreen('sentence_completion', { init: initReading });
+registerScreen('sentence_completion', { init: initReading, cleanup: cleanupReading });

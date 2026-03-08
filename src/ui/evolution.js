@@ -4,6 +4,7 @@ var EVOLUTION_STAGE_COUNT = 3;
 
 var evoTimer = null;
 var evoPlaying = false;
+var _evoAnimTimers = [];
 
 function isStarterPokemon(id) {
   return STARTER_POKEMON_IDS.includes(id);
@@ -62,7 +63,14 @@ function checkStarEvolution() {
 function getEvoTimer() { return evoTimer; }
 function setEvoTimer(t) { evoTimer = t; }
 
+function cancelEvolution() {
+  _evoAnimTimers.forEach(function(id) { clearTimeout(id); });
+  _evoAnimTimers = [];
+  evoPlaying = false;
+}
+
 function showEvolution(fromId, toId, callback) {
+  cancelEvolution();
   const o = document.createElement('div');
   o.className = 'evo-overlay';
   o.innerHTML = `
@@ -75,14 +83,15 @@ function showEvolution(fromId, toId, callback) {
     </div>
   `;
   document.body.appendChild(o);
-  setTimeout(() => {
+  _evoAnimTimers.push(setTimeout(() => {
     o.classList.add('evo-phase2');
-  }, 1500);
-  setTimeout(() => {
+  }, 1500));
+  _evoAnimTimers.push(setTimeout(() => {
     o.classList.add('evo-phase3');
-  }, 3000);
-  setTimeout(() => {
+  }, 3000));
+  _evoAnimTimers.push(setTimeout(() => {
+    _evoAnimTimers = [];
     o.remove();
     if (callback) callback();
-  }, 5500);
+  }, 5500));
 }
