@@ -8,8 +8,8 @@ Pure-Python, no dependencies (handles 4-bit and 8-bit indexed PNGs with tRNS).
 
 import struct, zlib, os, sys
 
-SPRITES_DIR = os.path.join(os.path.dirname(__file__), '..', 'sprites')
-OUT_PATH = os.path.join(os.path.dirname(__file__), '..', 'scripts', 'data', 'sprite-meta.js')
+SPRITES_DIR = os.path.join(os.path.dirname(__file__), '..', 'public', 'sprites')
+OUT_PATH = os.path.join(os.path.dirname(__file__), '..', 'src', 'data', 'sprite-meta.js')
 
 
 def opaque_bounds(path):
@@ -100,7 +100,7 @@ def main():
             canvas_size = w
         entries[pid] = (pt, pr, pb, pl)
 
-    lines = [f'const SPRITE_SIZE = {canvas_size};', '', 'const SPRITE_PAD = {']
+    lines = [f'export const SPRITE_SIZE = {canvas_size};', '', 'export const SPRITE_PAD = {']
     for pid in sorted(entries):
         t, r, b, l = entries[pid]
         lines.append(f'  {pid}: [{t},{r},{b},{l}],')

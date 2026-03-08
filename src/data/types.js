@@ -1,0 +1,20 @@
+var POKEMON_TYPES = {
+  fire:     { color: '#C25D15', he: 'אש' },
+  water:    { color: '#4A6FC4', he: 'מים' },
+  grass:    { color: '#4A8B2C', he: 'עשב' },
+  electric: { color: '#B8960B', he: 'חשמל' },
+  ice:      { color: '#5B9A9A', he: 'קרח' },
+  fighting: { color: '#9B1F18', he: 'לחימה' },
+  poison:   { color: '#7B2D7B', he: 'רעל' },
+  ground:   { color: '#9E8540', he: 'אדמה' },
+  flying:   { color: '#7A6ABD', he: 'עפיפון' },
+  psychic:  { color: '#C23860', he: 'פסיכי' },
+  bug:      { color: '#6D7A10', he: 'חרק' },
+  rock:     { color: '#8A7828', he: 'סלע' },
+  ghost:    { color: '#4E3D6E', he: 'רוח' },
+  dragon:   { color: '#5328C0', he: 'דרקון' },
+  dark:     { color: '#4A3C30', he: 'חושך' },
+  steel:    { color: '#787890', he: 'פלדה' },
+  fairy:    { color: '#B8607A', he: 'פיה' },
+  normal:   { color: '#6E6E56', he: 'רגיל' }
+};

@@ -7,44 +7,33 @@
   <link rel="icon" type="image/png" href="sprites/25.png">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/main.css">
 
-  <!-- Styles: core -->
-  <link rel="stylesheet" href="styles/core/variables.css">
-  <script src="scripts/manifests/themes.js"></script>
   <script>
-    // Apply saved theme before first paint to avoid a color flash.
     (function() {
+      var themes = {
+        bulbasaur:  { bg:'#162428', mid:'#1E3438', srf:'#28484E', acc:'#50C0A8', hov:'#70E0C8', pid:1  },
+        charmander: { bg:'#1E2838', mid:'#28394D', srf:'#325065', acc:'#F09858', hov:'#FFB478', pid:4  },
+        squirtle:   { bg:'#141E30', mid:'#1A2C48', srf:'#243B5C', acc:'#58A8F0', hov:'#80C4FF', pid:7  },
+        pikachu:    { bg:'#1A1A2E', mid:'#16213E', srf:'#0F3460', acc:'#FFCB05', hov:'#FFE066', pid:25 }
+      };
       var id = localStorage.getItem('pokemon-theme');
-      if (!id || !THEMES[id]) {
+      if (!id || !themes[id]) {
         var av = parseInt(localStorage.getItem('pokemon-avatar') || '0');
-        if (av) id = Object.keys(THEMES).find(function(k) { return THEMES[k].pokemonId === av; });
-        if (!id) id = Object.keys(THEMES)[0];
+        id = av ? Object.keys(themes).find(function(k) { return themes[k].pid === av; }) : null;
+        if (!id) id = 'bulbasaur';
       }
-      var t = THEMES[id], s = document.documentElement.style;
+      var t = themes[id], s = document.documentElement.style;
       function rgb(h) { var n = parseInt(h.slice(1),16); return (n>>16&255)+', '+(n>>8&255)+', '+(n&255); }
-      s.setProperty('--bg-deep',     t.bgDeep);
-      s.setProperty('--bg-mid',      t.bgMid);
-      s.setProperty('--bg-surface',  t.bgSurface);
-      s.setProperty('--bg-deep-rgb', rgb(t.bgDeep));
-      s.setProperty('--accent',      t.accent);
-      s.setProperty('--accent-hover',t.accentHover);
-      s.setProperty('--accent-rgb',  rgb(t.accent));
+      s.setProperty('--bg-deep',     t.bg);
+      s.setProperty('--bg-mid',      t.mid);
+      s.setProperty('--bg-surface',  t.srf);
+      s.setProperty('--bg-deep-rgb', rgb(t.bg));
+      s.setProperty('--accent',      t.acc);
+      s.setProperty('--accent-hover',t.hov);
+      s.setProperty('--accent-rgb',  rgb(t.acc));
     })();
   </script>
-  <link rel="stylesheet" href="styles/core/base.css">
-
-  <!-- Styles: layout -->
-  <link rel="stylesheet" href="styles/layout/profile.css">
-  <link rel="stylesheet" href="styles/layout/menu.css">
-  <link rel="stylesheet" href="styles/layout/vocabulary.css">
-  <link rel="stylesheet" href="styles/layout/spelling.css">
-  <link rel="stylesheet" href="styles/layout/memory.css">
-  <link rel="stylesheet" href="styles/layout/sentence_completion.css">
-  <link rel="stylesheet" href="styles/layout/pokedex.css">
-  <link rel="stylesheet" href="styles/layout/alphabet.css">
-  <!-- Styles: effects -->
-  <link rel="stylesheet" href="styles/effects/animations.css">
-  <link rel="stylesheet" href="styles/effects/responsive.css">
 </head>
 <body>
 
@@ -58,225 +47,69 @@
     <button class="back-btn" id="backBtn">חזור →</button>
   </div>
 
-  <div class="container">
+  <div class="container"></div>
 
-    <!-- Profile Screen -->
-    <div id="profile-screen" style="display:none">
-      <div class="profile-card">
-        <img class="profile-mascot" id="profileMascot" src="sprites/1.png" alt="">
-        <div class="profile-greeting" id="profileGreeting"></div>
-        <p class="profile-subtitle" id="profileSubtitle"></p>
+  <!-- Config & Data -->
+  <script src="src/config/themes.js"></script>
+  <script src="src/config/layouts.js"></script>
+  <script src="src/config/screens.js"></script>
+  <script src="src/config/cards.js"></script>
+  <script src="src/data/pokemon.js"></script>
+  <script src="src/data/types.js"></script>
+  <script src="src/data/sprite-meta.js"></script>
+  <script src="src/features/vocabulary/data.js"></script>
+  <script src="src/features/sentence-completion/data.js"></script>
+  <script src="src/features/alphabet/data.js"></script>
 
-        <div class="setup-stage-wrap" id="setupStageWrap">
-          <div class="setup-stage" id="setupStage0">
-            <div class="profile-input-group">
-              <input class="profile-input" id="profileNameInput" type="text"
-                     dir="rtl" placeholder="קוראים לי..." maxlength="20" autocomplete="off"
-                     oninput="onProfileNameInput(event)" onkeydown="onProfileNameKeydown(event)">
-            </div>
-          </div>
-          <div class="setup-stage" id="setupStage1">
-            <div class="avatar-picker" id="avatarPicker">
-              <div class="avatar-options" id="avatarOptions"></div>
-            </div>
-          </div>
-        </div>
+  <!-- Utilities -->
+  <script src="src/utils/array.js"></script>
+  <script src="src/utils/color.js"></script>
+  <script src="src/utils/strings.js"></script>
 
-        <div class="evo-progress" id="evoProgress"></div>
+  <!-- Core -->
+  <script src="src/core/event-bus.js"></script>
+  <script src="src/core/state.js"></script>
+  <script src="src/core/registry.js"></script>
 
-        <div class="layout-picker" id="layoutPicker"></div>
+  <!-- Services -->
+  <script src="src/services/sprite.js"></script>
+  <script src="src/services/speech.js"></script>
 
-        <div class="stats-grid" id="profileStats">
-          <div class="stat-card">
-            <span class="stat-icon"><span class="mi">star</span></span>
-            <span class="stat-value" id="profileStars">0</span>
-            <span class="stat-label">כוכבים</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-icon"><span class="mi">videogame_asset</span></span>
-            <span class="stat-value" id="profileGames">0</span>
-            <span class="stat-label">משחקים</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-icon"><span class="mi">menu_book</span></span>
-            <span class="stat-value" id="profilePokemon">0</span>
-            <span class="stat-label">פוקימונים</span>
-          </div>
-        </div>
+  <!-- UI -->
+  <script src="src/ui/theme.js"></script>
+  <script src="src/ui/layout.js"></script>
+  <script src="src/ui/rewards.js"></script>
+  <script src="src/ui/evolution.js"></script>
+  <script src="src/ui/top-bar.js"></script>
 
-        <div class="profile-actions">
-          <button class="btn btn-primary" id="profilePlayBtn" disabled><span class="mi">videogame_asset</span> בוא נתחיל</button>
-          <button class="btn btn-destructive" onclick="resetProgress()"><span class="mi">restart_alt</span> התחל מחדש</button>
-        </div>
-      </div>
-    </div>
+  <!-- Router -->
+  <script src="src/core/router.js"></script>
+  <script src="src/services/keyboard.js"></script>
 
-    <!-- Main Menu (content injected by active layout renderer) -->
-    <div class="menu-screen" id="menuScreen" style="display:none"></div>
+  <!-- Feature Templates -->
+  <script src="src/features/profile/template.js"></script>
+  <script src="src/features/vocabulary/template.js"></script>
+  <script src="src/features/spelling/template.js"></script>
+  <script src="src/features/memory/template.js"></script>
+  <script src="src/features/sentence-completion/template.js"></script>
+  <script src="src/features/alphabet/template.js"></script>
+  <script src="src/features/pokedex/template.js"></script>
 
-    <!-- Vocabulary Explorer -->
-    <div class="game-screen" id="vocabulary-game">
-      <div class="game-header">
-        <h2 class="pixel">מילון</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> השתמש בעכבר או במקלדת לדפדף ולשמוע</div>
-          <div class="info-motivation"><span class="mi">bolt</span> פיקאצ'ו למד 50 מילים ביום אחד!</div>
-        </div>
-      </div>
-      <div class="toggle-bar" id="categoryTabs"></div>
-      <div class="vocab-card" id="vocabCard">
-        <img class="pokemon-sprite" id="vocabSprite" src="" alt="">
-        <div class="english-word" id="vocabEnglish"></div>
-        <div class="hebrew-word" id="vocabHebrew"></div>
-        <div class="category-label" id="vocabCategory"></div>
-        <div style="margin-top:12px">
-          <button class="speak-btn" onclick="speakWord()" title="הקשב"><span class="mi">volume_up</span></button>
-        </div>
-      </div>
-      <div class="vocab-nav">
-        <button class="btn btn-secondary" onclick="vocabPrev()">→ הקודם</button>
-        <button class="btn btn-primary" onclick="vocabNext()">הבא ←</button>
-      </div>
-    </div>
+  <!-- Menu Renderers -->
+  <script src="src/features/menu/renderers/classic.js"></script>
+  <script src="src/features/menu/renderers/material.js"></script>
 
-    <!-- Spelling Bee -->
-    <div class="game-screen" id="spelling-game">
-      <div class="game-header">
-        <h2 class="pixel">איית את המילה</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> לחץ, גרור או הקלד אותיות כדי לאיית את המילה</div>
-          <div class="info-motivation"><span class="mi">local_fire_department</span> צ'רמנדר מאמין בך - אתה תצליח!</div>
-        </div>
-      </div>
-      <div class="toggle-bar">
-        <button class="btn-tertiary active" data-diff="easy" onclick="setSpellDiff('easy')">קל (3-5 אותיות)</button>
-        <button class="btn-tertiary" data-diff="medium" onclick="setSpellDiff('medium')">בינוני (5-7 אותיות)</button>
-        <button class="btn-tertiary" data-diff="hard" onclick="setSpellDiff('hard')">קשה (7+ אותיות)</button>
-      </div>
-      <img class="pokemon-sprite-sm" id="spellSprite" src="" alt="">
-      <div id="spellHint" style="color:var(--accent);margin:8px 0;font-size:15px"></div>
-      <div class="spelling-slots" id="spellSlots"></div>
-      <div class="letter-tiles" id="letterTiles"></div>
-      <div style="text-align:center;margin-top:14px">
-        <button class="btn btn-secondary" onclick="initSpelling()">דלג</button>
-      </div>
-    </div>
+  <!-- Feature Logic -->
+  <script src="src/features/menu/index.js"></script>
+  <script src="src/features/profile/index.js"></script>
+  <script src="src/features/vocabulary/index.js"></script>
+  <script src="src/features/spelling/index.js"></script>
+  <script src="src/features/memory/index.js"></script>
+  <script src="src/features/sentence-completion/index.js"></script>
+  <script src="src/features/alphabet/index.js"></script>
+  <script src="src/features/pokedex/index.js"></script>
 
-    <!-- Match Game -->
-    <div class="game-screen" id="memory-game">
-      <div class="game-header">
-        <h2 class="pixel">התאמה</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> לחץ, גרור או השתמש במקלדת כדי להתאים שם לתמונה</div>
-          <div class="info-motivation"><span class="mi">target</span> מיוטו תופס את כולם - גם אתה!</div>
-        </div>
-      </div>
-      <div class="toggle-bar">
-        <button class="btn-tertiary active" data-diff="easy" onclick="setMemDiff('easy')">קל (3-5 אותיות)</button>
-        <button class="btn-tertiary" data-diff="medium" onclick="setMemDiff('medium')">בינוני (5-7 אותיות)</button>
-        <button class="btn-tertiary" data-diff="hard" onclick="setMemDiff('hard')">קשה (7+ אותיות)</button>
-      </div>
-      <div class="memory-stats" style="display:none">
-        <span><span class="mi">target</span> <span id="memScore">0</span> / <span id="memTotal">0</span></span>
-      </div>
-      <div class="match-board" id="memoryGrid"></div>
-    </div>
-
-    <!-- Sentence Completion -->
-    <div class="game-screen" id="sentence-completion-game">
-      <div class="game-header">
-        <h2 class="pixel">השלם את המשפט</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> בחר את התשובה הנכונה כדי להשלים את המשפט</div>
-          <div class="info-motivation"><span class="mi">menu_book</span> סלופוק קורא לאט... אבל תמיד מצליח!</div>
-        </div>
-      </div>
-      <div class="toggle-bar" id="readCategoryBar"></div>
-      <div class="reading-card" id="readingCard">
-        <img class="pokemon-sprite" id="readSprite" src="" alt="">
-        <div class="reading-text" id="readingText"></div>
-        <button class="speak-btn" onclick="speakReading()" title="הקשב"><span class="mi">volume_up</span></button>
-        <div class="quiz-area" id="quizArea"></div>
-      </div>
-      <div style="text-align:center;margin-top:14px">
-        <button class="btn btn-secondary" onclick="nextReading()">דלג</button>
-      </div>
-    </div>
-
-    <!-- Alphabet ABC -->
-    <div class="game-screen" id="alphabet-game">
-      <div class="game-header">
-        <h2 class="pixel">אלף-בית</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> השתמש בחצים או במקלדת כדי לדפדף בין האותיות</div>
-          <div class="info-motivation"><span class="mi">auto_awesome</span> אפילו מג'יקארפ התחיל מ-A!</div>
-        </div>
-      </div>
-      <div class="abc-letter-nav" id="abcLetterNav"></div>
-      <div class="abc-hero-wrap">
-        <button class="abc-arrow abc-arrow-left" onclick="abcPrev()" aria-label="Previous">‹</button>
-        <div class="abc-hero" id="abcHero"></div>
-        <button class="abc-arrow abc-arrow-right" onclick="abcNext()" aria-label="Next">›</button>
-      </div>
-      <div class="abc-count" id="abcCount"></div>
-      <div class="abc-pokemon-grid" id="abcPokemonGrid"></div>
-    </div>
-
-    <!-- Pokedex -->
-    <div class="game-screen" id="pokedex-screen">
-      <div class="game-header">
-        <h2 class="pixel"><span class="mi">menu_book</span> פוקידע</h2>
-        <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> לחץ על דמות כדי לשמוע את השם שלה</div>
-          <div class="info-motivation"><span class="mi">search</span> פרופסור אוק גאה בך - חקור את כולם!</div>
-        </div>
-      </div>
-      <div class="toggle-bar" id="dexViewToggle">
-        <button class="btn-tertiary active" data-view="honeycomb" onclick="setDexView('honeycomb')">כוורת</button>
-        <button class="btn-tertiary" data-view="grid" onclick="setDexView('grid')">כרטיסיות</button>
-      </div>
-      <div class="dex-count" id="dexCount"></div>
-      <div class="dex-grid" id="dexGrid"></div>
-    </div>
-
-  </div>
-
-  <!-- Scripts: manifests (pure data, load first) -->
-  <!-- themes.js is loaded in <head> for early theme application -->
-  <script src="scripts/manifests/layouts.js"></script>
-  <script src="scripts/manifests/screens.js"></script>
-  <script src="scripts/manifests/cards.js"></script>
-
-  <!-- Scripts: core -->
-  <script src="scripts/core/strings.js"></script>
-  <script src="scripts/data/pokemon.js"></script>
-  <script src="scripts/data/types.js"></script>
-  <script src="scripts/data/sprite-meta.js"></script>
-  <script src="scripts/core/state.js"></script>
-  <script src="scripts/core/themes.js"></script>
-  <script src="scripts/core/layouts.js"></script>
-  <script src="scripts/core/helpers.js"></script>
-  <script src="scripts/core/rewards.js"></script>
-  <script src="scripts/core/evolution.js"></script>
-
-  <!-- Scripts: games -->
-  <script src="scripts/games/vocabulary/data.js"></script>
-  <script src="scripts/games/vocabulary/game.js"></script>
-  <script src="scripts/games/spelling/game.js"></script>
-  <script src="scripts/games/memory/game.js"></script>
-  <script src="scripts/games/sentence_completion/data.js"></script>
-  <script src="scripts/games/sentence_completion/game.js"></script>
-  <script src="scripts/games/alphabet/data.js"></script>
-  <script src="scripts/games/alphabet/game.js"></script>
-  <script src="scripts/games/profile/game.js"></script>
-  <script src="scripts/games/pokedex/game.js"></script>
-
-  <!-- Scripts: layout renderers -->
-  <script src="scripts/layouts/classic.js"></script>
-  <script src="scripts/layouts/material.js"></script>
-
-  <!-- Scripts: app init (must be last) -->
-  <script src="scripts/core/main.js"></script>
-
+  <!-- Entry Point -->
+  <script src="src/main.js"></script>
 </body>
 </html>

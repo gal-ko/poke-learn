@@ -16,17 +16,31 @@ A free, Pokemon-themed English learning app for Hebrew-speaking kids.
 
 ```
 poke-learn/
-├── index.html          # App entry point
-├── styles/             # CSS — core variables, per-screen layouts, themes, animations
-├── scripts/
-│   ├── core/           # App bootstrap, state management, rewards, evolution
-│   ├── data/           # Pokemon data and sprite metadata
-│   ├── games/          # One folder per activity (spelling, memory, vocabulary, …)
-│   ├── manifests/      # Config registries for themes, layouts, screens
-│   └── layouts/        # Menu renderers
-├── sprites/            # Pokemon artwork (sourced from PokeAPI)
-└── tools/              # Helper scripts for asset processing
+├── index.html              # Entry point — loads CSS and all scripts in order
+├── sprites/                # Pokemon artwork (sourced from PokeAPI)
+├── tools/                  # Helper scripts for asset processing
+└── src/
+    ├── main.js             # App initialization and event wiring
+    ├── config/             # Static configuration (themes, layouts, screens, cards)
+    ├── data/               # Domain data (Pokemon list, types, sprite metadata)
+    ├── core/               # Infrastructure (state, event bus, screen registry, router)
+    ├── services/           # Cross-cutting capabilities (speech, sprites, keyboard)
+    ├── ui/                 # Shared UI systems (theme, layout, rewards, evolution, top bar)
+    ├── utils/              # Pure utility functions (array, color, strings)
+    ├── styles/             # CSS — variables, base, animations, responsive, layout themes
+    │   └── layouts/        # Layout-specific styles (classic, material)
+    └── features/           # One folder per screen/activity
+        ├── profile/        # User profile and setup
+        ├── menu/           # Game menu and layout renderers
+        ├── vocabulary/     # Word learning
+        ├── spelling/       # Spelling game
+        ├── memory/         # Name-to-image matching
+        ├── sentence-completion/  # Fill-in-the-blank
+        ├── alphabet/       # Letter exploration
+        └── pokedex/        # Pokemon reference
 ```
+
+Each feature folder contains its own `index.js` (logic), `template.js` (HTML), optional `data.js`, and co-located CSS.
 
 ## Legal Note
 
