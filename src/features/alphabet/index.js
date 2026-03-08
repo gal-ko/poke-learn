@@ -56,11 +56,11 @@ function renderAlphabet() {
   let heroVisual = '';
   let heroName = '';
   if (firstPokemon) {
-    heroVisual = `<img class="abc-hero-sprite" src="${sprite(firstPokemon.id)}" alt="${firstPokemon.name}">`;
+    heroVisual = `${sprite(firstPokemon.id, 'abc-hero-sprite')}`;
     heroName = `<div class="abc-hero-name">${highlightLetter(firstPokemon.name, letter)}</div>`;
   } else if (hero) {
     if (typeof hero.visual === 'number') {
-      heroVisual = `<img class="abc-hero-sprite" src="${sprite(hero.visual)}" alt="">`;
+      heroVisual = `${sprite(hero.visual, 'abc-hero-sprite')}`;
     } else {
       heroVisual = `<div class="abc-hero-emoji">${hero.visual}</div>`;
     }
@@ -71,7 +71,7 @@ function renderAlphabet() {
     <div class="abc-hero-letter">
       <div class="abc-hero-letters"><span class="abc-hero-big">${letter}</span><span class="abc-hero-small">${lower}</span></div>
       <div class="abc-hero-bottom-row">
-        <button class="abc-hero-speak" onclick="speakLetter()" title="${STRINGS.listen}"><span class="mi">volume_up</span></button>
+        <button class="abc-hero-speak" onclick="speakLetter()" title="${STRINGS.listen}"><svg class="mi"><use href="#i-volume_up"/></svg></button>
         <div class="abc-hero-phonetic">${info.phonetic}</div>
       </div>
     </div>
@@ -87,7 +87,7 @@ function renderAlphabet() {
     document.getElementById('abcCount').textContent = STRINGS.abcCountPokemon(item.pokemon.length, letter);
     grid.innerHTML = item.pokemon.map(p => `
       <div class="abc-pokemon-card" onclick="speak('${p.name.replace(/'/g, "\\'")}')">
-        <img src="${sprite(p.id)}" alt="${p.name}">
+        ${sprite(p.id)}
         <span class="abc-poke-name">${highlightLetter(p.name, letter)}</span>
         <span class="abc-poke-he">${p.he}</span>
       </div>
@@ -96,7 +96,7 @@ function renderAlphabet() {
     document.getElementById('abcCount').textContent = STRINGS.abcCountWords(item.words.length, letter);
     grid.innerHTML = item.words.map(w => `
       <div class="abc-word-card" onclick="speak('${w.word.replace(/'/g, "\\'")}')">
-        <img src="${sprite(w.pokemonId)}" alt="${w.word}">
+        ${sprite(w.pokemonId)}
         <span class="abc-poke-name">${highlightLetter(w.word, letter)}</span>
         <span class="abc-poke-he">${w.he}</span>
         <span class="abc-word-context">${w.context}</span>

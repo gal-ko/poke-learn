@@ -126,10 +126,9 @@
   width: 100px;
 }
 
-.avatar-option img {
+.avatar-option .poke-sprite {
   width: 72px;
   height: 72px;
-  object-fit: contain;
   image-rendering: pixelated;
 }
 
@@ -244,14 +243,14 @@
   transform: scale(1.1);
 }
 
-.evo-stage img {
+.evo-stage .poke-sprite {
   width: 52px;
   height: 52px;
   image-rendering: pixelated;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
 }
 
-.evo-stage.current img {
+.evo-stage.current .poke-sprite {
   animation: bounce 2s infinite;
 }
 

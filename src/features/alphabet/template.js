@@ -4,8 +4,8 @@ function alphabetTemplate() {
       <div class="game-header">
         <h2 class="pixel">אלף-בית</h2>
         <div class="game-info">
-          <div class="info-controls"><span class="mi">info</span> השתמש בחצים או במקלדת כדי לדפדף בין האותיות</div>
-          <div class="info-motivation"><span class="mi">auto_awesome</span> אפילו מג'יקארפ התחיל מ-A!</div>
+          <div class="info-controls"><svg class="mi"><use href="#i-info"/></svg> השתמש בחצים או במקלדת כדי לדפדף בין האותיות</div>
+          <div class="info-motivation"><svg class="mi"><use href="#i-auto_awesome"/></svg> אפילו מג'יקארפ התחיל מ-A!</div>
         </div>
       </div>
       <div class="abc-letter-nav" id="abcLetterNav"></div>

@@ -10,7 +10,7 @@ function buildMenu() {
   } else {
     const renderCard = c => `
       <div class="game-card" onclick="startGame('${c.screen}')">
-        <img src="${sprite(c.spriteId)}" alt="">
+        ${sprite(c.spriteId)}
         <h3 class="pixel">${c.title}</h3>
         <p>${c.description}</p>
         <span class="card-stars">${c.stars}</span>

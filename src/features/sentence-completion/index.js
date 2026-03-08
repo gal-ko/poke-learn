@@ -79,7 +79,7 @@ function nextReading() {
 
 function renderReading() {
   const r = readCurrent;
-  document.getElementById('readSprite').src = sprite(r.pid);
+  setSprite(document.getElementById('readSprite'), r.pid);
 
   const blank = '<span class="read-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
   const display = r.sentence.replace('____', blank);
@@ -89,7 +89,7 @@ function renderReading() {
   const qa = document.getElementById('quizArea');
   qa.innerHTML = `
     <div class="quiz-options">
-      ${r.opts.map((o, i) => `<div class="quiz-opt-wrap" id="quizOpt${i}"><button class="quiz-opt-answer" onclick="answerQuiz(${i})">${cap(o)}</button><button class="quiz-opt-speak" onclick="speak('${o.replace(/'/g, "\\'")}')"><span class="mi">volume_up</span></button></div>`).join('')}
+      ${r.opts.map((o, i) => `<div class="quiz-opt-wrap" id="quizOpt${i}"><button class="quiz-opt-answer" onclick="answerQuiz(${i})">${cap(o)}</button><button class="quiz-opt-speak" onclick="speak('${o.replace(/'/g, "\\'")}')"><svg class="mi"><use href="#i-volume_up"/></svg></button></div>`).join('')}
     </div>
   `;
 }

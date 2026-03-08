@@ -54,7 +54,7 @@ function showCaught(pid, starText, starCount) {
   const msg = pick(SUCCESS_MESSAGES);
   const o = document.createElement('div');
   o.className = 'caught-overlay';
-  o.innerHTML = `<div class="caught-msg"><img src="sprites/${pid}.png" alt=""><h3 class="pixel">${msg}</h3>${starText ? `<p class="caught-stars" id="caughtStarsEl"><span class="mi">star</span> ${starText}</p>` : ''}</div>`;
+  o.innerHTML = `<div class="caught-msg">${sprite(pid)}<h3 class="pixel">${msg}</h3>${starText ? `<p class="caught-stars" id="caughtStarsEl"><svg class="mi"><use href="#i-star"/></svg> ${starText}</p>` : ''}</div>`;
   document.body.appendChild(o);
   showConfetti();
 
@@ -82,7 +82,7 @@ function flyStarsToCounter(count, callback) {
   for (let i = 0; i < count; i++) {
     const star = document.createElement('div');
     star.className = 'flying-star';
-    star.innerHTML = '<span class="mi">star</span>';
+    star.innerHTML = '<svg class="mi"><use href="#i-star"/></svg>';
     star.style.left = startX + 'px';
     star.style.top = startY + 'px';
     star.style.transitionDelay = (i * 150) + 'ms';

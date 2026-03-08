@@ -60,7 +60,7 @@ function initSpelling() {
   const hint = document.getElementById('spellHint');
   hint.textContent = spellDiff === 'easy' ? STRINGS.spellHintPrefix + spellWord[0] : spellPokemon.he;
 
-  document.getElementById('spellSprite').src = sprite(spellPokemon.id);
+  setSprite(document.getElementById('spellSprite'), spellPokemon.id);
   renderSpellSlots();
   renderLetterTiles();
 }

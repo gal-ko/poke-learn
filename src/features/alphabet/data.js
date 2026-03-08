@@ -1,6 +1,6 @@
 var LETTER_HERO = {
   Q: { visual: "👑", word: "Queen" },
-  U: { visual: '<span class="mi" style="font-size:64px">arrow_upward</span>', word: "Up" },
+  U: { visual: '<svg class="mi" style="width:64px;height:64px"><use href="#i-arrow_upward"/></svg>', word: "Up" },
   X: { visual: 137, word: "X-ray" },
   Y: { visual: "💛", word: "Yellow" }
 };

@@ -53,7 +53,7 @@ function renderPokedex() {
           <div class="hex-cell" onclick="toggleHex(this, '${p.name.replace(/'/g, "\\'")}')">
             <div class="hex-inner">
               <div class="hex-front">
-                <img src="${sprite(p.id)}" alt="${p.name}" style="transform:scale(${spriteScale(p.id)})">
+                ${sprite(p.id, '', 'transform:scale(' + spriteScale(p.id) + ')')}
               </div>
               <div class="hex-back">
                 <span class="hex-id">#${String(p.id).padStart(3, '0')}</span>
@@ -71,7 +71,7 @@ function renderPokedex() {
       const typeColor = getTypeColor(p.type);
       return `
         <div class="dex-card" onclick="speak('${p.name.replace(/'/g, "\\'")}')">
-          <img src="${sprite(p.id)}" alt="${p.name}" style="transform:scale(${spriteScale(p.id)})">
+          ${sprite(p.id, '', 'transform:scale(' + spriteScale(p.id) + ')')}
           <span class="dex-id">#${String(p.id).padStart(3, '0')}</span>
           <span class="dex-name">${p.name}</span>
           <span class="dex-he">${p.he}</span>

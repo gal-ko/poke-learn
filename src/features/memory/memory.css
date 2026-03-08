@@ -113,10 +113,9 @@
   padding: 8px;
 }
 
-.match-img img {
+.match-img .poke-sprite {
   width: 72px;
   height: 72px;
-  object-fit: contain;
   pointer-events: none;
   image-rendering: pixelated;
 }
@@ -160,10 +159,9 @@
   backdrop-filter: blur(4px);
 }
 
-.match-ghost img {
+.match-ghost .poke-sprite {
   width: 48px;
   height: 48px;
-  object-fit: contain;
   image-rendering: pixelated;
 }
 
@@ -178,5 +176,5 @@
 @media (max-width: 500px) {
   .match-board { gap: 36px; }
   .match-item { padding: 0 6px; height: 64px; }
-  .match-img img { width: 56px; height: 56px; }
+  .match-img .poke-sprite { width: 56px; height: 56px; }
 }

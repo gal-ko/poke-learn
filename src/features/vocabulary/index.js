@@ -26,7 +26,7 @@ function renderVocab() {
   const cat = VOCAB_CATEGORIES[vocabCat];
   const w = cat.words[vocabIdx];
   const pid = pick(w.pokemon);
-  document.getElementById('vocabSprite').src = sprite(pid);
+  setSprite(document.getElementById('vocabSprite'), pid);
   document.getElementById('vocabEnglish').textContent = w.en;
   document.getElementById('vocabHebrew').textContent = w.he;
   document.getElementById('vocabCategory').textContent = cat.he;

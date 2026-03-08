@@ -7,20 +7,22 @@
 }
 
 .mi {
-  font-family: 'Material Symbols Rounded';
-  font-weight: normal;
-  font-style: normal;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
   font-size: 20px;
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
+}
+
+.poke-sprite {
   display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  vertical-align: middle;
-  -webkit-font-smoothing: antialiased;
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  width: 96px;
+  height: 96px;
+  background: url('../../sprites/sheet.png') no-repeat;
+  background-size: 1600% 1000%;
+  image-rendering: pixelated;
 }
 
 html {
@@ -288,10 +290,9 @@ h1, h2, h3, .pixel {
   overflow: hidden;
 }
 
-.profile-btn img {
+.profile-btn .poke-sprite {
   width: 36px;
   height: 36px;
-  object-fit: contain;
   image-rendering: pixelated;
 }
 

@@ -8,7 +8,7 @@ LAYOUT_RENDERERS.dark = {
     const renderCard = c => `
       <div class="m3-card" onclick="startGame('${c.screen}')">
         <div class="m3-card-media">
-          <img src="${sprite(c.spriteId)}" alt="">
+          ${sprite(c.spriteId)}
         </div>
         <div class="m3-card-body">
           <h3>${c.title}</h3>

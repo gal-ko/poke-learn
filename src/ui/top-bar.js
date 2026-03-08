@@ -8,6 +8,6 @@ function updateTopbar() {
   const avatarId = AppState.getAvatar();
   if (avatarId) {
     const evolvedId = getEvolutionStage(avatarId, AppState.getStars());
-    document.getElementById('topbarAvatar').src = sprite(evolvedId);
+    setSprite(document.getElementById('topbarAvatar'), evolvedId);
   }
 }

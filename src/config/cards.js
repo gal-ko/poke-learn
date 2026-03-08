@@ -6,7 +6,7 @@ var MENU_CARDS = [
     spriteId: 6,
     title: 'איית את המילה',
     description: 'סדר אותיות כדי לאיית מילים באנגלית',
-    stars: '<span class="mi">star</span> כוכב לכל מילה'
+    stars: '<svg class="mi"><use href="#i-star"/></svg> כוכב לכל מילה'
   },
   {
     screen: 'match',
@@ -15,7 +15,7 @@ var MENU_CARDS = [
     spriteId: 150,
     title: 'התאמה',
     description: 'התאם את השם לתמונה הנכונה',
-    stars: '<span class="mi">star</span><span class="mi">star</span> 2 כוכבים לסיבוב'
+    stars: '<svg class="mi"><use href="#i-star"/></svg><svg class="mi"><use href="#i-star"/></svg> 2 כוכבים לסיבוב'
   },
   {
     screen: 'sentence_completion',
@@ -24,7 +24,7 @@ var MENU_CARDS = [
     spriteId: 149,
     title: 'השלם את המשפט',
     description: 'השלם את המילה החסרה במשפט',
-    stars: '<span class="mi">star</span> כוכב לתשובה נכונה'
+    stars: '<svg class="mi"><use href="#i-star"/></svg> כוכב לתשובה נכונה'
   },
   {
     screen: 'vocabulary',

@@ -68,8 +68,8 @@ function showEvolution(fromId, toId, callback) {
   o.innerHTML = `
     <div class="evo-scene">
       <div class="evo-sprites">
-        <img class="evo-from" src="${sprite(fromId)}" alt="">
-        <img class="evo-to" src="${sprite(toId)}" alt="">
+        ${sprite(fromId, 'evo-from')}
+        ${sprite(toId, 'evo-to')}
       </div>
       <div class="evo-flash"></div>
     </div>

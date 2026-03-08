@@ -17,6 +17,6 @@
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 8px;
   }
-  .dex-card img { width: 72px; height: 72px; }
+  .dex-card .poke-sprite { width: 72px; height: 72px; }
   .dex-name { font-size: var(--text-sm); }
 }

@@ -19,7 +19,7 @@ function initProfile() {
   const currentStars = AppState.getStars();
   const evolvedId = getEvolutionStage(baseAvatar, currentStars);
 
-  document.getElementById('profileMascot').src = sprite(evolvedId);
+  setSprite(document.getElementById('profileMascot'), evolvedId);
   document.getElementById('profileStars').textContent = currentStars;
   document.getElementById('profileGames').textContent = AppState.getGamesCompleted();
   document.getElementById('profilePokemon').textContent = POKEMON.length;
@@ -104,7 +104,7 @@ function renderLayoutPicker() {
   const container = document.getElementById('layoutPicker');
   container.innerHTML = `
     <button class="layout-toggle" onclick="toggleLayout()" title="${isDark ? 'מצב בהיר' : 'מצב כהה'}">
-      <span class="layout-toggle-icon"><span class="mi">${isDark ? 'light_mode' : 'dark_mode'}</span></span>
+      <span class="layout-toggle-icon"><svg class="mi"><use href="#i-${isDark ? 'light_mode' : 'dark_mode'}"/></svg></span>
     </button>
   `;
 }
@@ -131,9 +131,9 @@ function renderEvoProgress(baseId, starCount) {
     const p = POKEMON.find(pk => pk.id === id);
     const reached = currentLevel >= i;
     return `<div class="evo-stage ${reached ? 'reached' : ''} ${currentLevel === i ? 'current' : ''}">
-      <img src="${sprite(id)}" alt="${p ? p.name : ''}">
+      ${sprite(id)}
       <span>${p ? p.he : ''}</span>
-      <span class="evo-stage-stars"><span class="mi">star</span>${i * STARS_PER_EVOLUTION}</span>
+      <span class="evo-stage-stars"><svg class="mi"><use href="#i-star"/></svg>${i * STARS_PER_EVOLUTION}</span>
     </div>`;
   }).join('');
 
@@ -191,7 +191,7 @@ function renderAvatarPicker(locked) {
     const color = themeId ? THEMES[themeId].accent : '';
     const style = color ? `style="--avatar-color:${color}"` : '';
     return `<button class="avatar-option${sel}${dis}" ${style} onclick="${locked ? '' : `pickAvatar(${id})`}" ${locked ? 'disabled' : ''}>
-      <img src="${sprite(id)}" alt="${p ? p.name : ''}">
+      ${sprite(id)}
       <span>${p ? p.he : ''}</span>
     </button>`;
   }).join('');
@@ -199,7 +199,7 @@ function renderAvatarPicker(locked) {
 
 function pickAvatar(id) {
   selectedAvatar = id;
-  document.getElementById('profileMascot').src = sprite(id);
+  setSprite(document.getElementById('profileMascot'), id);
   applyThemeForPokemon(id);
   renderAvatarPicker(false);
 }

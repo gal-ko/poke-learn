@@ -12,10 +12,10 @@ var SUCCESS_MESSAGES = [
 var STRINGS = {
   welcomeGreeting:  'ברוכים הבאים',
   welcomeSubtitle:  'למד אנגלית עם פוקימון',
-  welcomePlayBtn:   '<span class="mi">videogame_asset</span> בוא נתחיל',
+  welcomePlayBtn:   '<svg class="mi"><use href="#i-videogame_asset"/></svg> בוא נתחיל',
   returnGreeting:   username => `שלום ${username}`,
   returnSubtitle:   'בוא נמשיך ללמוד אנגלית',
-  returnPlayBtn:    '<span class="mi">videogame_asset</span> המשך לשחק',
+  returnPlayBtn:    '<svg class="mi"><use href="#i-videogame_asset"/></svg> המשך לשחק',
   resetConfirm:     'האם אתה בטוח שברצונך לאפס את כל ההתקדמות',
   starReward:       count => count === 1 ? 'קיבלת כוכב' : `קיבלת ${count} כוכבים`,
   spellHintPrefix:  'רמז: מתחיל ב-',

@@ -123,7 +123,7 @@ function initMemory() {
       ${imgsOrder.map(p => `
         <button class="match-item match-img" data-pid="${p.id}" data-type="img"
           draggable="true" onclick="pickMatch('img',${p.id})">
-          <img src="${sprite(p.id)}" alt="${p.name}" style="transform:scale(${spriteScale(p.id)})">
+          ${sprite(p.id, '', 'transform:scale(' + spriteScale(p.id) + ')')}
         </button>
       `).join('')}
     </div>

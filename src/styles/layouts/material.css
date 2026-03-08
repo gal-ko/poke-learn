@@ -115,7 +115,7 @@ html.layout-dark .m3-card-media {
   justify-content: center;
 }
 
-html.layout-dark .m3-card-media img {
+html.layout-dark .m3-card-media .poke-sprite {
   width: 80px;
   height: 80px;
   image-rendering: pixelated;
@@ -123,7 +123,7 @@ html.layout-dark .m3-card-media img {
   transition: transform .25s cubic-bezier(.4, 0, .2, 1);
 }
 
-html.layout-dark .m3-card:hover .m3-card-media img {
+html.layout-dark .m3-card:hover .m3-card-media .poke-sprite {
   transform: scale(1.1);
 }
 

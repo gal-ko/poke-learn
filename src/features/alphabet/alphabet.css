@@ -169,7 +169,6 @@
 .abc-hero-sprite {
   width: 128px;
   height: 128px;
-  object-fit: contain;
   image-rendering: pixelated;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4));
 }
@@ -231,10 +230,9 @@
   transform: translateY(-3px);
 }
 
-.abc-pokemon-card img {
+.abc-pokemon-card .poke-sprite {
   width: 64px;
   height: 64px;
-  object-fit: contain;
   image-rendering: pixelated;
 }
 
@@ -277,10 +275,9 @@
   transform: translateY(-3px);
 }
 
-.abc-word-card img {
+.abc-word-card .poke-sprite {
   width: 56px;
   height: 56px;
-  object-fit: contain;
   image-rendering: pixelated;
   opacity: .7;
 }
@@ -304,7 +301,7 @@
   .abc-hero-sprite { width: 100px; height: 100px; }
   .abc-hero-emoji { font-size: 68px; line-height: 100px; }
   .abc-pokemon-grid { grid-template-columns: repeat(3, 1fr); }
-  .abc-pokemon-card img { width: 52px; height: 52px; }
+  .abc-pokemon-card .poke-sprite { width: 52px; height: 52px; }
   .abc-letter-btn { width: 30px; height: 30px; font-size: var(--text-sm); }
   .abc-arrow { width: 36px; height: 36px; font-size: 18px; }
 }
