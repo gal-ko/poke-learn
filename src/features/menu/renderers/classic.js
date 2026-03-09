@@ -16,8 +16,7 @@ LAYOUT_RENDERERS.classic = {
     menuEl.innerHTML = `
       <h2 class="pixel">למד אנגלית עם פוקימון</h2>
       <p>בחר משחק כדי להתחיל ללמוד</p>
-      <div class="game-grid">${scored.map(renderCard).join('')}</div>
-      <div class="game-grid game-grid-free">${free.map(renderCard).join('')}</div>
+      <div class="game-grid">${scored.map(renderCard).join('')}${free.map(renderCard).join('')}</div>
     `;
   }
 };

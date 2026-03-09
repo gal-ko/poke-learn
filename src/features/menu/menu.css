@@ -5,44 +5,30 @@
 .menu-screen h2 {
   font-size: var(--text-lg);
   color: var(--accent);
-  margin: 20px 0 10px;
+  margin: 12px 0 6px;
 }
 
 .menu-screen p {
   color: #aaa;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   font-size: var(--text-md);
 }
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, 220px);
   gap: 20px;
-  max-width: 780px;
+  justify-content: center;
+  max-width: 700px;
   margin: 0 auto;
 }
 
-.game-grid-free {
-  margin-top: 20px;
-}
-
-@media (max-width: 700px) {
-  .game-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 460px) {
-  .game-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .game-card {
+  width: 220px;
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--radius-md);
-  padding: 30px 20px;
+  padding: 20px 16px;
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
@@ -58,10 +44,10 @@
 }
 
 .game-card .poke-sprite {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   image-rendering: var(--sprite-render);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
 }
 

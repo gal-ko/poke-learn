@@ -47,14 +47,12 @@ function initProfile() {
     playBtn.disabled = false;
     playBtn.onclick = profilePlay;
     renderEvoProgress(baseAvatar, currentStars);
-    renderLayoutPicker();
   } else {
     stageWrap.style.display = '';
     statsGrid.style.display = 'none';
     document.querySelector('.btn-destructive').style.display = 'none';
     document.querySelector('.profile-card').classList.add('setup-mode');
     document.getElementById('evoProgress').innerHTML = '';
-    document.getElementById('layoutPicker').innerHTML = '';
     showSetupStage(setupStage);
   }
 }
@@ -100,23 +98,6 @@ function advanceSetup() {
   showSetupStage(1);
 }
 
-function renderLayoutPicker() {
-  const current = AppState.getLayout();
-  const isDark = current === 'dark';
-  const container = document.getElementById('layoutPicker');
-  container.innerHTML = `
-    <button class="layout-toggle" onclick="toggleLayout()" title="${isDark ? 'מצב בהיר' : 'מצב כהה'}">
-      <span class="layout-toggle-icon"><svg class="mi"><use href="#i-${isDark ? 'light_mode' : 'dark_mode'}"/></svg></span>
-    </button>
-  `;
-}
-
-function toggleLayout() {
-  const next = AppState.getLayout() === 'dark' ? 'classic' : 'dark';
-  applyLayout(next);
-  buildMenu();
-  renderLayoutPicker();
-}
 
 function renderEvoProgress(baseId, starCount) {
   const container = document.getElementById('evoProgress');

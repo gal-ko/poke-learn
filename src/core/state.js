@@ -51,7 +51,7 @@ var AppState = {
   },
 
   resetProgress() {
-    ['username', 'stars', 'games', 'avatar', 'evo-level', 'theme', 'layout'].forEach(
+    ['username', 'stars', 'games', 'avatar', 'evo-level', 'theme'].forEach(
       key => localStorage.removeItem('pokemon-' + key)
     );
   }

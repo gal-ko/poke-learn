@@ -14,7 +14,7 @@ function vocabularyTemplate() {
         <div class="english-word" id="vocabEnglish"></div>
         <div class="hebrew-word" id="vocabHebrew"></div>
         <div class="category-label" id="vocabCategory"></div>
-        <div style="margin-top:12px">
+        <div style="margin-top:6px">
           <button class="speak-btn" onclick="speakWord()" title="הקשב"><svg class="mi"><use href="#i-volume_up"/></svg></button>
         </div>
       </div>

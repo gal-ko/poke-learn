@@ -68,6 +68,15 @@ h1, h2, h3, .pixel {
   left: 50%;
   transform: translateX(-50%);
   direction: ltr;
+  white-space: nowrap;
+  pointer-events: auto;
+  z-index: 0;
+}
+
+.top-bar > div,
+.top-bar > button {
+  position: relative;
+  z-index: 1;
 }
 
 .topbar-username {
@@ -82,14 +91,16 @@ h1, h2, h3, .pixel {
 .stars-display {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-size: var(--text-md);
   font-weight: var(--weight-medium);
   color: var(--accent);
 }
 
 .stars-display .star-icon {
-  font-size: var(--text-lg);
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 }
 
 .back-btn {
@@ -114,13 +125,13 @@ h1, h2, h3, .pixel {
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 80px 20px 40px;
+  padding: 68px 20px 40px;
 }
 
 /* Shared game screen styles */
 .game-screen {
   display: none;
-  padding: 16px 0 24px;
+  padding: 8px 0 24px;
   animation: fadeIn .4s ease;
 }
 

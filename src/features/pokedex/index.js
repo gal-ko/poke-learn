@@ -38,15 +38,21 @@ function renderPokedex() {
     const cellW = 150;
     const container = document.getElementById('dexGrid');
     const available = container.parentElement.clientWidth;
-    const cols = Math.max(2, Math.min(4, Math.floor(available / cellW)));
+    const cols = Math.max(1, Math.min(4, Math.floor(available / cellW)));
     const rows = [];
-    for (let i = 0; i < POKEMON.length; i += cols) {
-      rows.push(POKEMON.slice(i, i + cols));
+    let i = 0;
+    let ri = 0;
+    while (i < POKEMON.length) {
+      const count = (ri % 2 === 1 && cols > 1) ? cols - 1 : cols;
+      rows.push(POKEMON.slice(i, i + count));
+      i += count;
+      ri++;
     }
     const lastRow = rows[rows.length - 1];
-    while (lastRow.length < cols) lastRow.push(null);
+    const lastExpected = ((rows.length - 1) % 2 === 1 && cols > 1) ? cols - 1 : cols;
+    while (lastRow.length < lastExpected) lastRow.push(null);
     grid.innerHTML = rows.map((row, ri) => {
-      const offset = ri % 2 === 1 ? ' hex-row-offset' : '';
+      const offset = (ri % 2 === 1 && cols > 1) ? ' hex-row-offset' : '';
       const cells = row.map(p => {
         if (!p) return '<div class="hex-cell hex-empty"></div>';
         const typeColor = getTypeColor(p.type);
@@ -55,6 +61,7 @@ function renderPokedex() {
             <div class="hex-inner">
               <div class="hex-front">
                 ${sprite(p.id, '', 'transform:scale(' + spriteScale(p.id) + ')')}
+                <span class="hex-front-name">${p.name}</span>
               </div>
               <div class="hex-back">
                 <span class="hex-id">#${String(p.id).padStart(3, '0')}</span>

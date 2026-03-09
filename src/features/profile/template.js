@@ -23,8 +23,6 @@ function profileTemplate() {
 
         <div class="evo-progress" id="evoProgress"></div>
 
-        <div class="layout-picker" id="layoutPicker"></div>
-
         <div class="stats-grid" id="profileStats">
           <div class="stat-card">
             <span class="stat-icon"><svg class="mi"><use href="#i-star"/></svg></span>
