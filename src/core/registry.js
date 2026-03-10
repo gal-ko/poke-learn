@@ -6,7 +6,6 @@ function addScreen(s) {
     display: s.display || 'block',
     showBack: s.showBack !== undefined ? s.showBack : true,
     showProfile: s.showProfile !== undefined ? s.showProfile : true,
-    hideUsername: s.hideUsername || false,
     init: null,
     cleanup: null
   };

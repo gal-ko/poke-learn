@@ -12,7 +12,7 @@ var SUCCESS_MESSAGES = [
 var STRINGS = {
   welcomeGreeting:  'ברוכים הבאים',
   welcomeSubtitle:  'למד אנגלית עם פוקימון',
-  welcomePlayBtn:   '<svg class="mi"><use href="#i-videogame_asset"/></svg> בוא נתחיל',
+  welcomePlayBtn:   'בוא נתפוס את כולם!',
   returnGreeting:   username => `שלום ${username}`,
   returnSubtitle:   'בוא נמשיך ללמוד אנגלית',
   returnPlayBtn:    '<svg class="mi"><use href="#i-videogame_asset"/></svg> המשך לשחק',

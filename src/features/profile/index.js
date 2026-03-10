@@ -36,7 +36,7 @@ function initProfile() {
   if (username) {
     stageWrap.style.display = 'none';
     statsGrid.style.display = '';
-    document.querySelector('.btn-destructive').style.display = '';
+    document.querySelector('.profile-card .btn-destructive').style.display = '';
     document.querySelector('.profile-card').classList.remove('setup-mode');
     input.value = username;
     input.disabled = true;
@@ -50,7 +50,7 @@ function initProfile() {
   } else {
     stageWrap.style.display = '';
     statsGrid.style.display = 'none';
-    document.querySelector('.btn-destructive').style.display = 'none';
+    document.querySelector('.profile-card .btn-destructive').style.display = 'none';
     document.querySelector('.profile-card').classList.add('setup-mode');
     document.getElementById('evoProgress').innerHTML = '';
     showSetupStage(setupStage);
@@ -212,7 +212,21 @@ function profilePlay() {
 }
 
 function resetProgress() {
-  if (!confirm(STRINGS.resetConfirm)) return;
+  var dialog = document.getElementById('resetDialog');
+  if (dialog && dialog.showModal) {
+    dialog.showModal();
+    var confirmBtn = document.getElementById('confirmResetBtn');
+    confirmBtn.onclick = function() {
+      dialog.close();
+      doResetProgress();
+    };
+  } else {
+    if (!confirm(STRINGS.resetConfirm)) return;
+    doResetProgress();
+  }
+}
+
+function doResetProgress() {
   AppState.resetProgress();
   setStars(0);
   selectedAvatar = STARTER_POKEMON_IDS[0];
@@ -233,11 +247,19 @@ document.addEventListener('keydown', function(e) {
     profilePlay();
     return;
   }
-  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
   e.preventDefault();
+  const cols = 2;
   const idx = STARTER_POKEMON_IDS.indexOf(selectedAvatar);
-  const dir = e.key === 'ArrowLeft' ? 1 : -1;
-  const next = (idx + dir + STARTER_POKEMON_IDS.length) % STARTER_POKEMON_IDS.length;
+  const len = STARTER_POKEMON_IDS.length;
+  let next;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const dir = e.key === 'ArrowLeft' ? 1 : -1;
+    next = (idx + dir + len) % len;
+  } else {
+    const dir = e.key === 'ArrowUp' ? -cols : cols;
+    next = (idx + dir + len) % len;
+  }
   pickAvatar(STARTER_POKEMON_IDS[next]);
   const opts = document.querySelectorAll('.avatar-option');
   opts.forEach(o => o.classList.remove('flash'));

@@ -2,9 +2,9 @@ function sentenceCompletionTemplate() {
   return `
     <div class="game-screen" id="sentence-completion-game">
       <div class="game-header">
-        <h2 class="pixel">השלם את המשפט</h2>
+        <div class="game-title-row"><h2 class="pixel">השלם את המשפט</h2><button class="info-toggle" onclick="const i=this.closest('.game-header').querySelector('.game-info');i.classList.toggle('show');if(i.classList.contains('show')){const b=this.getBoundingClientRect(),r=i.getBoundingClientRect();i.style.setProperty('--arrow-x',(b.left+b.width/2-r.left)+'px')}"><svg class="mi"><use href="#i-info"/></svg></button></div>
         <div class="game-info">
-          <div class="info-controls"><svg class="mi"><use href="#i-info"/></svg> בחר את התשובה הנכונה כדי להשלים את המשפט</div>
+          <div class="info-controls">בחר את התשובה הנכונה כדי להשלים את המשפט</div>
           <div class="info-motivation"><svg class="mi"><use href="#i-menu_book"/></svg> סלופוק קורא לאט... אבל תמיד מצליח!</div>
         </div>
       </div>

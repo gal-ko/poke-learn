@@ -87,9 +87,9 @@
 
 .quiz-opt-speak {
   padding: 0 12px;
-  background: rgba(var(--accent-rgb), .08);
+  background: rgba(var(--accent-rgb), .18);
   border: none;
-  border-right: 1px solid rgba(255, 255, 255, .1);
+  border-left: 1px solid rgba(var(--accent-rgb), .15);
   color: var(--accent);
   cursor: pointer;
   font-size: var(--text-md);
@@ -99,7 +99,7 @@
 }
 
 .quiz-opt-speak:hover {
-  background: rgba(var(--accent-rgb), .2);
+  background: rgba(var(--accent-rgb), .3);
 }
 
 .quiz-opt-wrap.correct-answer {

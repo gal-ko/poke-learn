@@ -2,10 +2,10 @@ function vocabularyTemplate() {
   return `
     <div class="game-screen" id="vocabulary-game">
       <div class="game-header">
-        <h2 class="pixel">מילון</h2>
+        <div class="game-title-row"><h2 class="pixel">אוצר מילים</h2><button class="info-toggle" onclick="const i=this.closest('.game-header').querySelector('.game-info');i.classList.toggle('show');if(i.classList.contains('show')){const b=this.getBoundingClientRect(),r=i.getBoundingClientRect();i.style.setProperty('--arrow-x',(b.left+b.width/2-r.left)+'px')}"><svg class="mi"><use href="#i-info"/></svg></button></div>
         <div class="game-info">
-          <div class="info-controls"><svg class="mi"><use href="#i-info"/></svg> השתמש בעכבר או במקלדת לדפדף ולשמוע</div>
-          <div class="info-motivation"><svg class="mi"><use href="#i-bolt"/></svg> פיקאצ'ו למד 50 מילים ביום אחד!</div>
+          <div class="info-controls">השתמש בעכבר או במקלדת לדפדף ולשמוע</div>
+          <div class="info-motivation"><svg class="mi"><use href="#i-auto_awesome"/></svg> דראוזי חולם על מילים חדשות!</div>
         </div>
       </div>
       <div class="toggle-bar" id="categoryTabs"></div>

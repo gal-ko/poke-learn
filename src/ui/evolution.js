@@ -81,17 +81,23 @@ function showEvolution(fromId, toId, callback) {
       </div>
       <div class="evo-flash"></div>
     </div>
+    <button class="evo-skip" aria-label="Skip">Skip ▸</button>
   `;
   document.body.appendChild(o);
+
+  function finishEvo() {
+    cancelEvolution();
+    o.remove();
+    if (callback) callback();
+  }
+
+  o.querySelector('.evo-skip').addEventListener('click', finishEvo);
+
   _evoAnimTimers.push(setTimeout(() => {
     o.classList.add('evo-phase2');
   }, 1500));
   _evoAnimTimers.push(setTimeout(() => {
     o.classList.add('evo-phase3');
   }, 3000));
-  _evoAnimTimers.push(setTimeout(() => {
-    _evoAnimTimers = [];
-    o.remove();
-    if (callback) callback();
-  }, 5500));
+  _evoAnimTimers.push(setTimeout(finishEvo, 5500));
 }

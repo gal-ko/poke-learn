@@ -12,7 +12,7 @@ function buildCategoryTabs() {
 function switchCat(i) {
   vocabCat = i;
   vocabIdx = 0;
-  document.querySelectorAll('.btn-tertiary').forEach((t, j) => t.classList.toggle('active', j === i));
+  document.querySelectorAll('#categoryTabs .btn-tertiary').forEach((t, j) => t.classList.toggle('active', j === i));
   renderVocab();
 }
 

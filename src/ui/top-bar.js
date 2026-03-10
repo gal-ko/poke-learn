@@ -1,7 +1,6 @@
 function updateTopbar() {
   const name = AppState.getUsername();
   const hasUser = !!name;
-  document.getElementById('topbarUsername').textContent = name || '';
   document.getElementById('starCount').parentElement.style.display = hasUser ? '' : 'none';
   const titleBtn = document.getElementById('titleBtn');
   titleBtn.style.cursor = hasUser ? 'pointer' : 'default';

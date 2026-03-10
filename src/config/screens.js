@@ -10,7 +10,6 @@ var APP_SCREENS = [
     elementId: 'profile-screen',
     display: 'flex',
     showBack: false,
-    showProfile: false,
-    hideUsername: true
+    showProfile: false
   }
 ];

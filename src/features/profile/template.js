@@ -43,7 +43,7 @@ function profileTemplate() {
 
         <div class="profile-actions">
           <button class="btn btn-primary" id="profilePlayBtn" disabled><svg class="mi"><use href="#i-videogame_asset"/></svg> בוא נתחיל</button>
-          <button class="btn btn-destructive" onclick="resetProgress()"><svg class="mi"><use href="#i-restart_alt"/></svg> התחל מחדש</button>
+          <button class="btn btn-destructive" onclick="resetProgress()" style="display:none"><svg class="mi"><use href="#i-restart_alt"/></svg> התחל מחדש</button>
         </div>
       </div>
     </div>`;

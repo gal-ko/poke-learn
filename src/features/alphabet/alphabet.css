@@ -80,6 +80,8 @@
   flex-shrink: 0;
   padding: 0;
   line-height: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .abc-arrow:hover,
@@ -98,8 +100,9 @@
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   direction: ltr;
+  overflow: hidden;
 }
 
 .abc-hero-letter {
@@ -163,19 +166,23 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
+  min-width: 0;
   gap: 4px;
+  overflow: hidden;
 }
 
 .abc-hero-sprite {
-  width: 128px;
-  height: 128px;
+  width: 100%;
+  max-width: 128px;
+  height: auto;
+  aspect-ratio: 1;
   image-rendering: pixelated;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4));
 }
 
 .abc-hero-emoji {
-  font-size: 88px;
-  line-height: 128px;
+  font-size: clamp(48px, 15vw, 88px);
+  line-height: 1.4;
 }
 
 .abc-hero-name {

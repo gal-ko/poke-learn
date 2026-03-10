@@ -12,6 +12,7 @@ var spellQueueDiff = '';
 
 function spellKeyHandler(e) {
   if (currentScreen !== 'spelling') return;
+  if (e.target && e.target.classList && e.target.classList.contains('spell-slot')) return;
   if (e.key === 'Backspace') {
     e.preventDefault();
     spellUndo();
@@ -62,29 +63,98 @@ function initSpelling() {
   renderSpellSlots();
   renderLetterTiles();
   spellBindDrag();
+  spellFocusNextEmpty();
 }
 
 function renderSpellSlots() {
   const c = document.getElementById('spellSlots');
   c.innerHTML = '';
-  const hasLockedLetters = spellLocked.some(l => l);
   for (let i = 0; i < spellWord.length; i++) {
-    const s = document.createElement('div');
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.maxLength = 1;
+    inp.autocomplete = 'off';
+    inp.setAttribute('autocorrect', 'off');
+    inp.setAttribute('autocapitalize', 'characters');
+    inp.setAttribute('spellcheck', 'false');
+    inp.setAttribute('inputmode', 'text');
+    inp.dataset.idx = i;
     const entry = spellSlots[i];
     const hasLetter = entry !== null;
-    s.className = 'spell-slot' + (hasLetter ? ' filled' : '') + (spellLocked[i] ? ' correct' : '');
+    inp.className = 'spell-slot' + (hasLetter ? ' filled' : '') + (spellLocked[i] ? ' correct' : '');
     if (hasLetter) {
-      s.textContent = entry.letter;
-      if (!spellLocked[i]) {
-        s.style.cursor = 'pointer';
-        s.onclick = ((idx) => () => removeSlot(idx))(i);
+      inp.value = entry.letter;
+      if (spellLocked[i]) {
+        inp.readOnly = true;
       }
-    } else if (hasLockedLetters) {
-      s.textContent = '_';
-      s.style.color = 'rgba(255,255,255,.2)';
     }
-    c.appendChild(s);
+    inp.addEventListener('input', spellSlotInput);
+    inp.addEventListener('keydown', spellSlotKeydown);
+    inp.addEventListener('focus', function() { this.select(); });
+    c.appendChild(inp);
   }
+}
+
+function spellSlotInput(e) {
+  var inp = e.target;
+  var idx = parseInt(inp.dataset.idx);
+  var raw = inp.value.toUpperCase();
+  inp.value = '';
+  if (!raw) return;
+  var ch = raw[raw.length - 1];
+  if (HEBREW_TO_ENGLISH_KEYS[ch]) ch = HEBREW_TO_ENGLISH_KEYS[ch];
+  if (!/^[A-Z]$/.test(ch)) return;
+
+  if (spellSlots[idx] !== null && !spellLocked[idx]) {
+    removeSlot(idx);
+  }
+
+  for (var i = 0; i < spellLetters.length; i++) {
+    if (!spellLetters[i].used && spellLetters[i].letter === ch) {
+      tapLetter(i, idx);
+      spellFocusNextEmpty(idx + 1);
+      return;
+    }
+  }
+}
+
+function spellSlotKeydown(e) {
+  var idx = parseInt(e.target.dataset.idx);
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    if (spellSlots[idx] !== null && !spellLocked[idx]) {
+      removeSlot(idx);
+      spellFocusSlot(idx);
+    } else {
+      for (var p = idx - 1; p >= 0; p--) {
+        if (spellSlots[p] !== null && !spellLocked[p]) {
+          removeSlot(p);
+          spellFocusSlot(p);
+          return;
+        }
+      }
+    }
+    return;
+  }
+  if (e.key === 'ArrowRight') { e.preventDefault(); spellFocusSlot(idx + 1); return; }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); spellFocusSlot(idx - 1); return; }
+}
+
+function spellFocusSlot(idx) {
+  var slots = document.querySelectorAll('#spellSlots .spell-slot');
+  if (idx >= 0 && idx < slots.length) slots[idx].focus();
+}
+
+function spellFocusNextEmpty(startFrom) {
+  var slots = document.querySelectorAll('#spellSlots .spell-slot');
+  var start = startFrom || 0;
+  for (var i = start; i < slots.length; i++) {
+    if (spellSlots[i] === null && !spellLocked[i]) { slots[i].focus(); return; }
+  }
+  for (var j = 0; j < start; j++) {
+    if (spellSlots[j] === null && !spellLocked[j]) { slots[j].focus(); return; }
+  }
+  if (document.activeElement) document.activeElement.blur();
 }
 
 function renderLetterTiles() {
@@ -118,6 +188,8 @@ function tapLetter(tileIdx, targetSlotIdx) {
   renderLetterTiles();
   if (spellSlots.every(s => s !== null)) {
     setTimeout(() => spellCheck(), 300);
+  } else {
+    spellFocusNextEmpty(slotIdx + 1);
   }
 }
 
@@ -127,6 +199,7 @@ function removeSlot(idx) {
   spellSlots[idx] = null;
   renderSpellSlots();
   renderLetterTiles();
+  spellFocusSlot(idx);
 }
 
 function spellUndo() {
@@ -139,6 +212,7 @@ function spellUndo() {
   spellSlots[lastIdx] = null;
   renderSpellSlots();
   renderLetterTiles();
+  spellFocusSlot(lastIdx);
 }
 
 function spellCheck() {
@@ -147,7 +221,7 @@ function spellCheck() {
   const guess = spellSlots.map(s => s.letter).join('');
   const slotEls = document.querySelectorAll('.spell-slot');
   if (guess === spellWord) {
-    slotEls.forEach(s => s.classList.add('correct'));
+    slotEls.forEach(s => { s.classList.add('correct'); s.readOnly = true; });
     addStar(1);
     AppState.incrementGamesCompleted();
     showCaught(spellPokemon.id, STRINGS.starReward(1), 1);
@@ -172,6 +246,7 @@ function spellCheck() {
       }
       renderSpellSlots();
       renderLetterTiles();
+      spellFocusNextEmpty();
     }, SPELL_WRONG_LOCK_DELAY);
   }
 }

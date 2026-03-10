@@ -47,7 +47,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></symbol>
     <symbol id="i-videogame_asset" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-11 7H8v2c0 .55-.45 1-1 1s-1-.45-1-1v-2H4c-.55 0-1-.45-1-1s.45-1 1-1h2V9c0-.55.45-1 1-1s1 .45 1 1v2h2c.55 0 1 .45 1 1s-.45 1-1 1zm5.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
-    <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1-8h-2V7h2v2z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></symbol>
     <symbol id="i-bolt" viewBox="0 -960 960 960"><path d="M360-360H236q-24 0-35.5-21.5T203-423l299-430q10-14 26-19.5t33 .5q17 6 25 21t6 32l-32 259h155q26 0 36.5 23t-6.5 43L416-100q-11 13-27 17t-31-3q-15-7-23.5-21.5T328-139l32-221Z"/></symbol>
     <symbol id="i-local_fire_department" viewBox="0 -960 960 960"><path d="M160-400q0-113 67-217t184-182q22-15 45.5-1.5T480-760v52q0 34 23.5 57t57.5 23q17 0 32.5-7.5T621-657q8-10 20.5-12.5T665-664q63 45 99 115t36 149q0 88-43 160.5T644-125q17-24 26.5-52.5T680-238q0-40-15-75.5T622-377L480-516 339-377q-29 29-44 64t-15 75q0 32 9.5 60.5T316-125q-70-42-113-114.5T160-400Zm320-4 85 83q17 17 26 38t9 45q0 49-35 83.5T480-120q-50 0-85-34.5T360-238q0-23 9-44.5t26-38.5l85-83Z"/></symbol>
     <symbol id="i-volume_up" viewBox="0 0 24 24"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v.2c0 .38.25.71.6.85C17.18 6.53 19 9.06 19 12s-1.82 5.47-4.4 6.5c-.36.14-.6.47-.6.85v.2c0 .63.63 1.07 1.21.85C18.6 19.11 21 15.84 21 12s-2.4-7.11-5.79-8.4c-.58-.23-1.21.22-1.21.85z"/></symbol>
@@ -62,12 +62,20 @@
   <div class="top-bar">
     <div style="display:flex;align-items:center;gap:8px">
       <button class="profile-btn" id="profileBtn" onclick="showScreen('profile')" title="פרופיל" style="display:none"><span class="poke-sprite" id="topbarAvatar"></span></button>
-      <span class="topbar-username" id="topbarUsername"></span>
       <div class="stars-display"><span class="star-icon"><svg class="mi"><use href="#i-star"/></svg></span><span id="starCount">0</span></div>
     </div>
     <h1 class="pixel" id="titleBtn" onclick="goHome()" style="cursor:pointer">Poke-Learn</h1>
-    <button class="back-btn" id="backBtn">חזור →</button>
+    <button class="back-btn" id="backBtn"><span class="back-btn-text">חזור </span>←</button>
   </div>
+
+  <dialog id="resetDialog" class="md3-dialog">
+    <div class="md3-dialog-headline">איפוס התקדמות</div>
+    <div class="md3-dialog-content">כל ההתקדמות, הכוכבים והנתונים יימחקו. האם להמשיך?</div>
+    <div class="md3-dialog-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('resetDialog').close()">ביטול</button>
+      <button class="btn btn-destructive" id="confirmResetBtn">אפס הכל</button>
+    </div>
+  </dialog>
 
   <div class="container"></div>
 

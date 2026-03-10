@@ -1,3 +1,5 @@
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 var currentScreen = 'profile';
 
 var _buildMenu = null;
@@ -18,6 +20,7 @@ function hideAllScreens() {
   runCleanups();
 
   document.querySelectorAll('.caught-overlay, .evo-overlay, .confetti-container, .flying-star').forEach(el => el.remove());
+  document.querySelectorAll('.game-info.show').forEach(el => el.classList.remove('show'));
   if (typeof cancelEvolution === 'function') cancelEvolution();
 
   const layout = getActiveLayout();
@@ -50,8 +53,6 @@ function showScreen(name, pushState) {
   backBtn.style.display = screen.showBack ? 'inline-block' : 'none';
   if (screen.showBack) backBtn.onclick = () => showScreen('menu');
   profileBtn.style.display = screen.showProfile ? 'inline-flex' : 'none';
-  if (screen.hideUsername) document.getElementById('topbarUsername').textContent = '';
-
   currentScreen = name;
   if (name === 'menu' && _buildMenu) _buildMenu();
   if (screen.init) screen.init();

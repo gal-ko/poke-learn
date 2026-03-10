@@ -1,7 +1,7 @@
 var MEM_REWARD_DELAY = 550;
 var MEM_NEXT_ROUND_DELAY = 3000;
 var MEM_WRONG_FLASH_DELAY = 600;
-var MEM_PAIRS_PER_ROUND = 4;
+var MEM_PAIRS_PER_ROUND = 3;
 
 var memDiff = 'easy';
 var memPool = [];

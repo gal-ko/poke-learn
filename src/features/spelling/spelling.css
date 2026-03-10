@@ -19,14 +19,25 @@
   height: 62px;
   border: 2px dashed rgba(255, 255, 255, .3);
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   color: #fff;
   transition: .3s;
   background: rgba(255, 255, 255, .05);
+  text-align: center;
+  outline: none;
+  caret-color: var(--accent);
+  font-family: var(--font);
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.spell-slot:focus {
+  border-color: var(--accent);
+  border-style: solid;
+  background: rgba(var(--accent-rgb), .08);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .2);
 }
 
 .spell-slot.filled {

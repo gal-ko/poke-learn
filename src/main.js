@@ -36,3 +36,8 @@ function init() {
 }
 
 init();
+
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.info-toggle') || e.target.closest('.game-info')) return;
+  document.querySelectorAll('.game-info.show').forEach(function(el) { el.classList.remove('show'); });
+});

@@ -12,7 +12,7 @@ var MENU_CARDS = [
     screen: 'match',
     elementId: 'memory-game',
     group: 'scored',
-    spriteId: 150,
+    spriteId: 61,
     title: 'התאמה',
     description: 'התאם את השם לתמונה הנכונה',
     stars: '<svg class="mi"><use href="#i-star"/></svg><svg class="mi"><use href="#i-star"/></svg> 2 כוכבים לסיבוב'
@@ -21,7 +21,7 @@ var MENU_CARDS = [
     screen: 'sentence_completion',
     elementId: 'sentence-completion-game',
     group: 'scored',
-    spriteId: 149,
+    spriteId: 79,
     title: 'השלם את המשפט',
     description: 'השלם את המילה החסרה במשפט',
     stars: '<svg class="mi"><use href="#i-star"/></svg> כוכב לתשובה נכונה'
@@ -30,8 +30,8 @@ var MENU_CARDS = [
     screen: 'vocabulary',
     elementId: 'vocabulary-game',
     group: 'free',
-    spriteId: 25,
-    title: 'מילון',
+    spriteId: 96,
+    title: 'אוצר מילים',
     description: 'למד מילים חדשות באנגלית',
     stars: 'לימוד חופשי'
   },
@@ -39,7 +39,7 @@ var MENU_CARDS = [
     screen: 'alphabet',
     elementId: 'alphabet-game',
     group: 'free',
-    spriteId: 63,
+    spriteId: 24,
     title: 'אלף-בית',
     description: 'למד את האותיות באנגלית',
     stars: 'לימוד חופשי'
