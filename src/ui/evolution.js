@@ -80,8 +80,8 @@ function showEvolution(fromId, toId, callback) {
         ${sprite(toId, 'evo-to')}
       </div>
       <div class="evo-flash"></div>
+      <button class="evo-skip" aria-label="Skip">Skip ▸</button>
     </div>
-    <button class="evo-skip" aria-label="Skip">Skip ▸</button>
   `;
   document.body.appendChild(o);
 
